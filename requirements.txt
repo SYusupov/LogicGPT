@@ -1,0 +1,11 @@
+# torch==2.3.0+cu121 --find-links https://download.pytorch.org/whl/cu121
+torch==2.3.0
+unsloth==2024.8
+fastai==2.7.17
+numpy==1.26.4
+bitsandbytes==0.43.3
+transformers==4.44.2
+xformers==0.0.26.post1
+uvicorn==0.30.6
+peft==0.12.0
+llama_cpp_python==0.2.90
