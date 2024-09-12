@@ -1,7 +1,17 @@
 from llama_cpp import Llama
+import os
+
+num_cores = os.cpu_count()
+n_threads = max(1, num_cores // 2)
+print('n_threads', n_threads)
+print('supports cuda: ', Llama.supports_cuda())
 
 llm = Llama(
-    model_path="./model/unsloth.Q4_K_M.gguf"
+    model_path="./model/unsloth.Q4_K_M.gguf",
+    use_mmap=True,
+    use_gpu=True, 
+    n_batch=4,
+    n_threads=n_threads
 )
 
 def model_inference(instruction: str, input: str):
