@@ -26,9 +26,17 @@ I used LoRA approach for finetuning.
 The finetuning is done in the notebook in `finetuning.ipynb` in Google Colab with the free NVIDIA T4 GPU.
 
 ## 4. Model Evaluation
-To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The setup for the evaluation was as follows: 
-1. I launched the server with the model in GGUF format with [llama-cpp-python](https://github.com/abetlen/llama-cpp-python): `python -m llama_cpp.server --model model/unsloth.Q4_K_M.gguf`.
-2. Run the evaluation with lm-evaluation-harness by passing the local server address of the model: `lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks lambada_openai`
+To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The setup for the evaluation was as follows:
+
+1. I launched the server with the model in GGUF format with [llama-cpp-python](https://github.com/abetlen/llama-cpp-python):
+
+   ```bash
+   python -m llama_cpp.server --model model/unsloth.Q4_K_M.gguf
+   ```
+2. Run the evaluation with lm-evaluation-harness by passing the local server address of the model:
+   ```bash
+   lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks lambada_openai
+   ```
 
 ## 5. API Creation
 The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp. 
