@@ -35,7 +35,7 @@ To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-ev
    ```
 2. Run the evaluation with lm-evaluation-harness by passing the local server address of the model:
    ```bash
-   lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks lambada_openai
+   lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks arithmetic --limit 10 --log_samples --output_path 'finetuned_eval_arithmetic_results'
    ```
 
 To evaluate the original Mistral 7B before fine-tuning, I used Google Colab as it is faster, and the evaluation of both models is possible this way. The notebook is available at `evaluation/original_model_evaluation.ipynb`.
