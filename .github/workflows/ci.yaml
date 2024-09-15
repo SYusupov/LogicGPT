@@ -48,9 +48,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      - name: Build Docker Image
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and Push Docker image
         run: |
-          docker compose up --build
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/logicgpt:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/logicgpt:${{ github.sha }}
   
   # ## Testing if the API works correctly
   # test_api: 

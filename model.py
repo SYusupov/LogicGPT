@@ -4,7 +4,7 @@ import os
 num_cores = os.cpu_count()
 n_threads = max(1, num_cores // 2)
 print('n_threads', n_threads)
-print('supports cuda: ', Llama.supports_cuda())
+# print('supports cuda: ', Llama.supports_cuda())
 
 llm = Llama(
     model_path="./model/unsloth.Q4_K_M.gguf",
