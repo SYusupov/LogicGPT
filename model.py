@@ -16,9 +16,10 @@ llm = Llama(
 
 
 def model_inference(instruction: str, input: str):
-    platypus_prompt = """Below is a question or task that requires logical reasoning to solve, 
-    along with additional context or information. Provide a detailed and well-reasoned response 
-    that demonstrates clear logical thinking.
+    platypus_prompt = """
+    Below is a question or task that requires logical reasoning to solve,
+     along with additional context or information. Provide a detailed and
+     well-reasoned response that demonstrates clear logical thinking.
 
     ### Question/Task:
     {}
