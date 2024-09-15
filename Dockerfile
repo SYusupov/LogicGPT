@@ -38,6 +38,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
+# # Clone and install lm-evaluation-harness
+# RUN git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness && \
+# cd lm-evaluation-harness && \
+# pip install -e .
+
 # Create a non-root user called appuser
 RUN useradd -m appuser
 # Switch to the non-privileged user to run the application.

@@ -1,3 +1,4 @@
+# for finetuning and running the LLM model
 # torch==2.3.0+cu121 --find-links https://download.pytorch.org/whl/cu121
 torch==2.3.0
 unsloth==2024.8
@@ -6,7 +7,17 @@ numpy==1.26.4
 bitsandbytes==0.43.3
 transformers==4.44.2
 xformers==0.0.26.post1
-uvicorn==0.30.6
 peft==0.12.0
+
+# for inference
 llama_cpp_python==0.2.90
+
+# for the application
 fastapi
+uvicorn==0.30.6
+
+# for evaluation with llama_cpp and lm-evaluation-harness
+lm-eval
+sse_starlette
+starlette_context
+pydantic_settings

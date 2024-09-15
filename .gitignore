@@ -1,0 +1,4 @@
+/lm-evaluation-harness/
+/__pycache__
+*.gguf
+test.ipynb
