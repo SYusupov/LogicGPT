@@ -56,8 +56,8 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/logicgpt:${{ github.sha }} .
-          docker push ${{ secrets.DOCKER_USERNAME }}/logicgpt:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }}
   
   # ## Testing if the API works correctly
   # test_api: 
