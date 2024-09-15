@@ -9,13 +9,16 @@ print('supports cuda: ', Llama.supports_cuda())
 llm = Llama(
     model_path="./model/unsloth.Q4_K_M.gguf",
     use_mmap=True,
-    use_gpu=True, 
+    use_gpu=True,
     n_batch=4,
     n_threads=n_threads
 )
 
+
 def model_inference(instruction: str, input: str):
-    platypus_prompt = """Below is a question or task that requires logical reasoning to solve, along with additional context or information. Provide a detailed and well-reasoned response that demonstrates clear logical thinking.
+    platypus_prompt = """Below is a question or task that requires logical reasoning to solve, 
+    along with additional context or information. Provide a detailed and well-reasoned response 
+    that demonstrates clear logical thinking.
 
     ### Question/Task:
     {}
@@ -27,12 +30,10 @@ def model_inference(instruction: str, input: str):
     {}"""
 
     input = platypus_prompt.format(
-            # "What is a famous tall tower in Paris?", # instruction
-            instruction,
-            # "", # input
-            input,
-            "", # output - leave this blank for generation!
-        )
-    
+        instruction,
+        input,
+        ""  # output - leave this blank for generation!
+    )
+
     output = llm(input, max_tokens=100, echo=True)
     return output
