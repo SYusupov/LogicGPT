@@ -21,9 +21,9 @@ print('n_threads', n_threads)
 # print('supports cuda: ', Llama.supports_cuda())
 
 llm = Llama(
-    model_path="../model/unsloth.Q4_K_M.gguf",
+    model_path="/model_files/unsloth.Q4_K_M.gguf",
     use_mmap=True,
-    use_gpu=True,
+    # use_gpu=True,
     n_batch=4,
     n_threads=n_threads
 )

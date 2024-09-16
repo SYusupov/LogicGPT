@@ -6,11 +6,14 @@ services:
     image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
     ports:
       - 8000:8000
+    volumes:
+      - ./app:/app
+      - ./model_files:/model_files
     
     # check if app is running periodically
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
-      interval: 60s
+      interval: 30s
       timeout: 10s
       retries: 3
     
