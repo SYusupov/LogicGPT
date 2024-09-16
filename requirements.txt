@@ -15,6 +15,7 @@ llama_cpp_python==0.2.90
 # for the application
 fastapi
 uvicorn==0.30.6
+pytest
 
 # for evaluation with llama_cpp and lm-evaluation-harness
 lm-eval

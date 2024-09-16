@@ -1,6 +1,20 @@
 from llama_cpp import Llama
 import os
 
+platypus_prompt = """
+    Below is a question or task that requires logical reasoning to solve,
+     along with additional context or information. Provide a detailed and
+     well-reasoned response that demonstrates clear logical thinking.
+
+    ### Question/Task:
+    {}
+
+    ### Input:
+    {}
+
+    ### Reasoned Response:
+    {}"""
+
 num_cores = os.cpu_count()
 n_threads = max(1, num_cores // 2)
 print('n_threads', n_threads)
@@ -16,19 +30,6 @@ llm = Llama(
 
 
 def model_inference(instruction: str, input: str):
-    platypus_prompt = """
-    Below is a question or task that requires logical reasoning to solve,
-     along with additional context or information. Provide a detailed and
-     well-reasoned response that demonstrates clear logical thinking.
-
-    ### Question/Task:
-    {}
-
-    ### Input:
-    {}
-
-    ### Reasoned Response:
-    {}"""
 
     input = platypus_prompt.format(
         instruction,
