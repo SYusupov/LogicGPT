@@ -1,4 +1,4 @@
-from .model import model_inference
+from model import model_inference
 from fastapi import FastAPI
 from typing import Optional
 
