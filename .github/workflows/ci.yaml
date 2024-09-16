@@ -72,7 +72,13 @@ jobs:
 
       - name: Start the API with Docker Compose
         run: |
-          cd app
+          echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" > .env
+
+          # defining image tag manually, in case didn't run docker_build
+          echo "DOCKER_IMAGE_TAG=ffb120a49495b896072b545614d717235ca924b4" > .env
+          # # defining image tag based on commit-id
+          # echo "DOCKER_IMAGE_TAG=$(git rev-parse HEAD)" > .env
+
           docker compose up --build
 
       - name: Wait for API to be Ready
