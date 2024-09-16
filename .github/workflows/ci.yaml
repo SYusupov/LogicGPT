@@ -31,7 +31,7 @@ jobs:
       
       - name: Run Linter (flake8) on all Python Files
         run: |
-          flake8 .
+          flake8 .e
   
   # ## Building the docker image
   # docker_build:
@@ -60,7 +60,7 @@ jobs:
   ## Testing if the API works correctly
   test_api:
     name: Test API
-    needs: docker_build  # Only run this after the Docker build is successful
+    # needs: docker_build  # Only run this after the Docker build is successful
     runs-on: ubuntu-latest
 
     steps:
