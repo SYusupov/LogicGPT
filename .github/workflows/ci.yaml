@@ -78,8 +78,8 @@ jobs:
       
       - name: Start the API with Docker Compose
         run: |
-          DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
-          # DOCKERHUB_USERNAME="sayyory"
+          # DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+          DOCKERHUB_USERNAME="sayyory"
           
           # Define the Docker image tag manually
           # in case didn't run docker_build workflow
