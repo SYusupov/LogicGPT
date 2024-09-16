@@ -43,8 +43,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 ENV PYTHONPATH=/app
 # # Copy the source code into the container.
-# COPY ./app /app
-# COPY ./model_files /model_files
+# COPY ./app /app # loaded with containers
+COPY ./model_files /model_files
 
 # Create a non-root user called appuser
 RUN useradd -m appuser
