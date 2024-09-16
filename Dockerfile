@@ -30,6 +30,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
+# Download the model from Google Drive
+RUN curl -L -o /model_files/unsloth.Q4_K_M.gguf "https://drive.google.com/uc?export=download&id=FILE_ID"
+
 # # Clone and install lm-evaluation-harness
 # RUN git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness && \
 # cd lm-evaluation-harness && \
