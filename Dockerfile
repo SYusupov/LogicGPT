@@ -45,6 +45,8 @@ ENV PYTHONPATH=/app
 # # Copy the source code into the container.
 # COPY ./app /app # loaded with containers
 COPY ./model_files /model_files
+# Ensure that the model file is readable by all users
+RUN chmod -R 755 /model_files
 
 # Create a non-root user called appuser
 RUN useradd -m appuser
