@@ -67,7 +67,7 @@ def test_valid_inference():
 
 # Test inference with input provided
 def test_inference_with_long_instruction_and_input():
-    
+
     input_text = "Choose A, B, C or D as your solution."
     response = client.post(
         "/ask",
@@ -130,7 +130,7 @@ def test_empty_model_response():
         "/ask",
         json={"instruction": instruction, "input": input_text}
     )
-    
+
     assert response.status_code == 200
     response_data = response.text
     assert "Reasoned Response" in response_data
