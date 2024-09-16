@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     g++ \
+    curl \  # For downloading from Google Drive
     && rm -rf /var/lib/apt/lists/*
 
 # Update pip and setuptools
