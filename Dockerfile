@@ -20,6 +20,11 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Create the /model_files directory
+RUN mkdir -p /model_files
+# Download the model from Google Drive
+RUN curl -L -o /model_files/unsloth.Q4_K_M.gguf "https://drive.google.com/uc?export=download&id=1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l"
+
 # Update pip and setuptools
 RUN python -m pip install --upgrade pip setuptools wheel
 
@@ -30,9 +35,6 @@ RUN python -m pip install --upgrade pip setuptools wheel
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
-
-# Download the model from Google Drive
-RUN curl -L -o /model_files/unsloth.Q4_K_M.gguf "https://drive.google.com/uc?export=download&id=1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l"
 
 # # Clone and install lm-evaluation-harness
 # RUN git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness && \
