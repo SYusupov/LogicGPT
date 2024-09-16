@@ -12,18 +12,21 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
+# Install gdown for downloading files from Google Drive
+RUN pip install gdown
+# Create the /model_files directory
+RUN mkdir -p /model_files
+# Download the model using gdown
+RUN gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf
+# # Download the model from Google Drive
+# RUN curl -L -o /model_files/unsloth.Q4_K_M.gguf "https://drive.google.com/uc?export=download&id=1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l"
+
 # Add dependencies before the pip install step
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     g++ \
-    curl \
     && rm -rf /var/lib/apt/lists/*
-
-# Create the /model_files directory
-RUN mkdir -p /model_files
-# Download the model from Google Drive
-RUN curl -L -o /model_files/unsloth.Q4_K_M.gguf "https://drive.google.com/uc?export=download&id=1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l"
 
 # Update pip and setuptools
 RUN python -m pip install --upgrade pip setuptools wheel
