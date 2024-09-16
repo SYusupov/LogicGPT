@@ -48,10 +48,10 @@ COPY ./model_files /model_files
 # Ensure that the model file is readable by all users
 RUN chmod -R 755 /model_files
 
-# Create a non-root user called appuser
-RUN useradd -m appuser
-# Switch to the non-privileged user to run the application.
-USER appuser
+# # Create a non-root user called appuser
+# RUN useradd -m appuser
+# # Switch to the non-privileged user to run the application.
+# USER appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8000
