@@ -31,10 +31,10 @@ COPY . /app
 # Create a non-root user called appuser
 RUN useradd -m appuser
 # Switch to the non-privileged user to run the application.
-USER appuser
+# USER appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8000
 
 # Run the application.
-CMD ["uvicorn", "main:app", "--reload", "--port", "8000", "--host", "0.0.0.0"]
+CMD ["uvicorn", "main:app", "--reload", "--port", "8000", "--host", "0.0.0.0", "--log-level", "debug"]
