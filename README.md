@@ -60,9 +60,9 @@ Then the API can be initialized with the command
 ## 6. Containerization
 
 ## 7. CI/CD Pipeline with GitHub Actions
-In case no changes were made to Dockerfile or the directory `/app`, no need to build the docker-image again, therefore:
+In case no changes were made to Dockerfile or the directory `/app`, there is no need to build the docker-image again, therefore:
 1. the workflow `docker_build` can be commented out as it takes around 10 minutes
-2. the previous commit-id should be used, i.e. line 85 should be commented out and the previous commit-id should be used as `DOCKER_IMAGE_TAG`, and line 88 should be commented.
+2. the previous commit-id should be used, i.e. line 85 should be commented out, the previous commit-id should be used as `DOCKER_IMAGE_TAG`, and line 88 should be commented.
 3. comment line 63 of `.github/workflows/ci.yaml` since we are not running `docker-build`
 
 
