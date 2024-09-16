@@ -96,7 +96,7 @@ jobs:
           cat .env
 
           # Start Docker Compose with the defined variables
-          docker compose up --build
+          docker compose -f compose.yaml --build
 
       - name: Wait for API to be Ready
         run: |
