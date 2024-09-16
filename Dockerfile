@@ -6,7 +6,7 @@
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-ARG PYTHON_VERSION=3.10.12
+ARG PYTHON_VERSION=3.10-slim
 FROM python:${PYTHON_VERSION} as base
 
 # Prevents Python from writing pyc files.
@@ -36,7 +36,7 @@ WORKDIR /app
 # into this layer.
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
+    python -m pip install --no-cache-dir -r requirements.txt
 
 # # Clone and install lm-evaluation-harness
 # RUN git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness && \
@@ -49,7 +49,7 @@ RUN useradd -m appuser
 USER appuser
 
 # Copy the source code into the container.
-COPY . .
+COPY . /app
 
 # Expose the port that the application listens on.
 EXPOSE 8000

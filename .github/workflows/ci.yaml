@@ -96,7 +96,7 @@ jobs:
 
           # Start Docker Compose with the defined variables
           docker compose -f compose.yaml up --build
-
+          
       - name: Wait for API to be Ready
         run: |
           until curl -s http://localhost:8000 | grep "Hello"; do
