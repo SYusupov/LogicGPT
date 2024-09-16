@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
-# Stage 1: Build stage
 ARG PYTHON_VERSION=3.10-slim
-FROM python:${PYTHON_VERSION} AS builder
+FROM python:${PYTHON_VERSION} AS base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -17,8 +16,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     g++ \
-    && python -m pip install --upgrade pip setuptools wheel \
-    && rm -rf /var/lib/apt/lists/*
+    && python -m pip install --upgrade pip setuptools wheel
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
@@ -26,21 +24,15 @@ RUN apt-get update && apt-get install -y \
 # into this layer.
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
+    python -m pip install --no-cache-dir -r requirements.txt
 
-# Install gdown for downloading files from Google Drive
-RUN pip install gdown
 # Create the /model_files directory
-RUN mkdir -p /model_files
-# Download the model using gdown
-RUN gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf
-
-# Stage 2: Final stage
-FROM python:3.10-slim
-
-WORKDIR /app
-# Copy only the needed parts from the builder stage
-COPY --from=builder /model_files /model_files
+# and Download the model using gdown
+# and remove unnecessary packages after downloading everything
+RUN mkdir -p /model_files \
+    && gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf \
+    && apt-get purge -y --auto-remove build-essential cmake g++ \
+    && rm -rf /root/.cache /var/lib/apt/lists/*
 
 ENV PYTHONPATH=/app
 # # Copy the source code into the container.

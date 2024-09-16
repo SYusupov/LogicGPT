@@ -1,3 +1,6 @@
+# for downloading files from Google Drive
+gdown
+
 # for inference
 llama_cpp_python
 
