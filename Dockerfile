@@ -25,8 +25,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # cd lm-evaluation-harness && \
 # pip install -e .
 
+ENV PYTHONPATH=/app
 # Copy the source code into the container.
-COPY . /app
+COPY ./app /app
 
 # Create a non-root user called appuser
 RUN useradd -m appuser

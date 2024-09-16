@@ -1,7 +1,8 @@
-version: "3"
+version: "3.8"
 
 services:
   server:
+    # build: .
     image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
     ports:
       - 8000:8000
