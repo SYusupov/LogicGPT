@@ -1,6 +1,9 @@
 # for inference
 llama_cpp_python
 
+# for installing the model from Google Drive
+curl
+
 # for finetuning and running the LLM model
 # torch==2.3.0+cu121 --find-links https://download.pytorch.org/whl/cu121
 torch==2.3.0
@@ -19,6 +22,7 @@ pytest
 
 # for evaluation with llama_cpp and lm-evaluation-harness
 lm-eval
+# lm_eval[wandb] # for weights and biases
 sse_starlette
 starlette_context
 pydantic_settings
