@@ -32,7 +32,7 @@ COPY ./app /app
 # Create a non-root user called appuser
 RUN useradd -m appuser
 # Switch to the non-privileged user to run the application.
-# USER appuser
+USER appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8000
