@@ -7,7 +7,7 @@ long_instruction = """
     Babe was a professional baseball player who was known both for his prowess
      at the plate and his perceived "heart of gold." One day, Babe was
      visiting a sick boy named Jimmy in the hospital. Babe was touched by
-     Jimmy's will to live despite a very poor prognosis. In a moment of 
+     Jimmy's will to live despite a very poor prognosis. In a moment of
      weakness, Babe told Jimmy that in consideration of Jimmy's courage, he
      would do anything that Jimmy asked. Jimmy's eyes momentarily gleamed as
      he asked Babe to "hit a homer for me in your next game." Babe replied,
@@ -36,11 +36,13 @@ long_instruction = """
      recover from Joe because, even under the modern trend, moral
      consideration is not valid."""
 
+
 # Test the root endpoint
 def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"Hello": "World"}
+
 
 # Test valid model inference
 def test_valid_inference():
@@ -57,8 +59,11 @@ def test_valid_inference():
     response_data = response.text
     assert "Reasoned Response" in response_data
     # Check if there is text after "Reasoned Response:"
-    reasoned_response_part = response_data.split("Reasoned Response:")[-1].strip()
-    assert len(reasoned_response_part) > 0  # Ensure that the model generated some output
+    reasoned_response_part = response_data.split(
+        "Reasoned Response:")[-1].strip()
+    # Ensure that the model generated some output
+    assert len(reasoned_response_part) > 0
+
 
 # Test inference with input provided
 def test_inference_with_long_instruction_and_input():
@@ -73,8 +78,10 @@ def test_inference_with_long_instruction_and_input():
     response_data = response.text
     assert "Reasoned Response" in response_data
     # Check if there is text after "Reasoned Response:"
-    reasoned_response_part = response_data.split("Reasoned Response:")[-1].strip()
+    reasoned_response_part = response_data.split(
+        "Reasoned Response:")[-1].strip()
     assert len(reasoned_response_part) > 0
+
 
 # Test inference with missing instruction
 def test_inference_missing_instruction():
@@ -84,7 +91,9 @@ def test_inference_missing_instruction():
         json={"instruction": "", "input": input_text}
     )
 
-    assert response.status_code == 422  # FastAPI will return a 422 if required fields are missing or invalid
+    # FastAPI will return a 422 if required fields are missing or invalid
+    assert response.status_code == 422
+
 
 # Test inference with a long input text
 def test_inference_with_long_input():
@@ -97,8 +106,10 @@ def test_inference_with_long_input():
     response_data = response.text
     assert "Reasoned Response" in response_data
     # Check if there is text after "Reasoned Response:"
-    reasoned_response_part = response_data.split("Reasoned Response:")[-1].strip()
+    reasoned_response_part = response_data.split(
+        "Reasoned Response:")[-1].strip()
     assert len(reasoned_response_part) > 0
+
 
 # Test an invalid request structure
 def test_invalid_request_structure():
@@ -106,7 +117,10 @@ def test_invalid_request_structure():
         "/ask",
         json={"invalid_field": "test"}
     )
-    assert response.status_code == 422  # FastAPI should raise a 422 error for missing required fields
+
+    # FastAPI should raise a 422 error for missing required fields
+    assert response.status_code == 422
+
 
 # Test when model returns no tokens (edge case)
 def test_empty_model_response():
@@ -121,5 +135,6 @@ def test_empty_model_response():
     response_data = response.text
     assert "Reasoned Response" in response_data
     # Check if there is text after "Reasoned Response:"
-    reasoned_response_part = response_data.split("Reasoned Response:")[-1].strip()
+    reasoned_response_part = response_data.split(
+        "Reasoned Response:")[-1].strip()
     assert len(reasoned_response_part) > 0
