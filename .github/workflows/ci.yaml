@@ -31,7 +31,7 @@ jobs:
       
       - name: Run Linter (flake8) on all Python Files
         run: |
-          flake8 .e
+          flake8 .
   
   # ## Building the docker image
   # docker_build:

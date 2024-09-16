@@ -1,8 +1,8 @@
-version: '3'
+version: '3.8'
 
 services:
   server:
-    image: "${DOCKERHUB_USERNAME}/logic_gpt:${IMAGE_TAG}"  # Use the image from Docker Hub
+    image: "${DOCKERHUB_USERNAME}/logic_gpt:${DOCKER_IMAGE_TAG}"  # Use the image from Docker Hub
     ports:
       - "8000:8000"
     
