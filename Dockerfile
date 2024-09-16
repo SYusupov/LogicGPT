@@ -26,10 +26,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     g++ \
-    && rm -rf /var/lib/apt/lists/*
-
-# Update pip and setuptools
-RUN python -m pip install --upgrade pip setuptools wheel
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m pip install --upgrade pip setuptools wheel
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
