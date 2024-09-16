@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   server:
-    image: "${DOCKERHUB_USERNAME}/logic_gpt:${DOCKER_IMAGE_TAG}"  # Use the image from Docker Hub
+    image: "sayyory/logic_gpt:${DOCKER_IMAGE_TAG}"  # Use the image from Docker Hub
     ports:
       - "8000:8000"
     

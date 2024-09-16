@@ -79,7 +79,7 @@ jobs:
       - name: Start the API with Docker Compose
         run: |
           # DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
-          DOCKERHUB_USERNAME="sayyory"
+          # DOCKERHUB_USERNAME="sayyory"
           
           # Define the Docker image tag manually
           # in case didn't run docker_build workflow
@@ -89,7 +89,7 @@ jobs:
           # DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
 
           # Write the variables to the .env file
-          echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" >> .env
+          # echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" >> .env
           echo "DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG" >> .env
 
           # Verify the contents of the .env file
