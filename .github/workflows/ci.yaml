@@ -99,10 +99,17 @@ jobs:
           
       - name: Wait for API to be Ready
         run: |
+          count=0
           until curl -s http://localhost:8000 | grep "Hello"; do
-            echo "Waiting for API to be ready..."
+            count=$((count+1))
+            if [ $count -ge 4 ]; then
+              echo "API did not become ready in time. Exiting."
+              exit 1
+            fi
+            echo "Waiting for API to be ready... ($count)"
             sleep 5
           done
+          echo "API is ready!"
       
       - name: Run API Tests
         run: |
