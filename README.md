@@ -42,6 +42,15 @@ To evaluate the original Mistral 7B before fine-tuning, I used Google Colab as i
 
 ## 5. API Creation
 The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp. 
+To run locally, Docker Hub credentials where the docker-image is stored should be set up with the following commands for Linux/Ubuntu environments:
+   ```bash
+   set DOCKERHUB_USERNAME=dockerhub_username
+   set DOCKERHUB_PASSWORD=dockerhub_password
+   ```
+Also, the latest commit-id should used in the code, so it should also be saved e.g. with:
+   ```bash
+   echo "DOCKER_IMAGE_TAG=ffb120a49495b896072b545614d717235ca924b4" >> .env"
+   ```
 
 ## 6. Containerization
 
