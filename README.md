@@ -41,7 +41,8 @@ To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-ev
 To evaluate the original Mistral 7B before fine-tuning, I used Google Colab as it is faster, and the evaluation of both models is possible this way. The notebook is available at `evaluation/original_model_evaluation.ipynb`.
 
 ## 5. API Creation
-The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp. 
+The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp.
+
 To run locally, Docker Hub credentials where the docker-image is stored should be set up with the following commands for Linux/Ubuntu environments:
    ```bash
    set DOCKERHUB_USERNAME=dockerhub_username
@@ -49,7 +50,11 @@ To run locally, Docker Hub credentials where the docker-image is stored should b
    ```
 Also, the latest commit-id should used in the code, so it should also be saved e.g. with:
    ```bash
-   echo "DOCKER_IMAGE_TAG=ffb120a49495b896072b545614d717235ca924b4" >> .env"
+   echo "DOCKER_IMAGE_TAG=ffb120a49495b896072b545614d717235ca924b4" >> .env
+   ```
+Then the API can be initialized with the command
+   ```bash
+   docker compose -f compose.yaml up --build
    ```
 
 ## 6. Containerization
