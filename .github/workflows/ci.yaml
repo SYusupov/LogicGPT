@@ -78,7 +78,7 @@ jobs:
       
       - name: Start the API with Docker Compose
         run: |
-          # DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+          DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           # DOCKERHUB_USERNAME="sayyory"
           
           # Define the Docker image tag manually
@@ -96,7 +96,7 @@ jobs:
           cat .env
 
           # Start Docker Compose with the defined variables
-          docker compose -f compose.yaml --build
+          docker compose -f compose.yaml up --build
 
       - name: Wait for API to be Ready
         run: |
