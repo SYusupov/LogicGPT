@@ -2,8 +2,8 @@ version: "3"
 
 services:
   server:
-    # image: sayyory/logic_gpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
-    image: sayyory/logicgpt:ffb120a49495b896072b545614d717235ca924b4
+    image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
+    # image: sayyory/logicgpt:ffb120a49495b896072b545614d717235ca924b4
     ports:
       - 8000:8000
     
