@@ -22,8 +22,8 @@ The dataset was chosen because:
 The finetuning was done using:
 - Unsloth, a framework that facilitates and speeds up fine-tuning,
 - SFTTrainer of HuggingFace, Supervised Fine-tuning Trainer
-I used LoRA approach for finetuning. 
-The finetuning is done in the notebook in `finetuning.ipynb` in Google Colab with the free NVIDIA T4 GPU.
+I used LoRA approach for finetuning.
+The finetuning is done in the notebook in [finetuning.ipynb](finetuning.ipynb) in Google Colab with the free NVIDIA T4 GPU.
 
 ## 4. Model Evaluation
 To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). 
