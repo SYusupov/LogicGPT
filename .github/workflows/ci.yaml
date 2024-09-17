@@ -6,7 +6,9 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**.md' # no need if just README.md update
+      - '**.md'
+      - '**.png'
+      - '**.jpg'
   pull_request:
     branches:
       - main
