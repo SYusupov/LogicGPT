@@ -118,7 +118,7 @@ jobs:
         run: |
           DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           
-          if [ ${{ github.event.inputs.build_docker_image || "true" }} == "true" ]; then
+          if [ ${{ github.event.inputs.build_docker_image || 'true' }} == "true" ]; then
             # dynamically set the image tag based on the commit ID
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
