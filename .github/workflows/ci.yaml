@@ -69,6 +69,9 @@ jobs:
     # needs: docker_build
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
       - name: Install gdown
         run: |
           python -m pip install gdown
@@ -81,18 +84,6 @@ jobs:
       - name: Set correct permissions for model files
         run: |
           chmod -R 755 ./model_files
-
-      - name: Verify model file
-        run: |
-          if [ -f ./model_files/unsloth.Q4_K_M.gguf ]; then
-            echo "Model download successful."
-          else
-            echo "Model download failed."
-            exit 1
-          fi
-
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
       - name: Verify model file in repo context
         run: |
