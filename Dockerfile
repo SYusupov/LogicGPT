@@ -37,17 +37,18 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Create the /model_files directory
 # and Download the model using gdown
 # and remove unnecessary packages after downloading everything
-RUN mkdir -p /model_files \
-    && gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf \
+# RUN mkdir -p /model_files \
+#     && gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf \
     # && apt-get purge -y --auto-remove build-essential cmake g++ \
-    && rm -rf /root/.cache /var/lib/apt/lists/*
+RUN rm -rf /root/.cache /var/lib/apt/lists/*
+    # && pip uninstall -y gdown
 
 ENV PYTHONPATH=/app
 # # Copy the source code into the container.
 # COPY ./app /app # loaded with containers
 # COPY ./model_files /model_files
 # Ensure that the model file is readable by all users
-RUN chmod -R 755 /model_files
+# RUN chmod -R 755 /model_files
 
 # # Create a non-root user called appuser
 # RUN useradd -m appuser

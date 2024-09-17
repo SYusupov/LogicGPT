@@ -6,6 +6,7 @@ services:
       - 8000:8000
     volumes:
       - ./app:/app
+      - ./model_files:/model_files
     
     # check if app is running periodically
     healthcheck:
