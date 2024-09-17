@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG PYTHON_VERSION=3.10-slim
+ARG PYTHON_VERSION=3.10-alpine
 FROM python:${PYTHON_VERSION} AS base
 
 # Prevents Python from writing pyc files.
@@ -9,14 +9,17 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
 
+# Set to noninteractive to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /app
 
 # Add dependencies before the pip install step
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    g++ \
-    && python -m pip install --upgrade pip setuptools wheel
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     cmake \
+#     g++
+    # && python -m pip install --upgrade pip setuptools wheel
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
@@ -31,7 +34,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # and remove unnecessary packages after downloading everything
 RUN mkdir -p /model_files \
     && gdown 1MMdhxFgvcwgFXi068atfqIbGn1m8ur_l -O /model_files/unsloth.Q4_K_M.gguf \
-    && apt-get purge -y --auto-remove build-essential cmake g++ \
+    # && apt-get purge -y --auto-remove build-essential cmake g++ \
     && rm -rf /root/.cache /var/lib/apt/lists/*
 
 ENV PYTHONPATH=/app
