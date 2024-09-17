@@ -9,15 +9,15 @@ on:
     branches:
       - main
 
-inputs:
-  build_docker_image:
-    description: "Whether to build the Docker image or not"
-    required: false
-    default: "false"
-  docker_image_tag:
-    description: "Tag of the latest correct Docker Image"
-    required: false
-    default: "3bf89b5864b7471becfec8bf90f2861aaaa3e90f"
+  inputs:
+    build_docker_image:
+      description: "Whether to build the Docker image or not"
+      required: false
+      default: "false"
+    docker_image_tag:
+      description: "Tag of the latest correct Docker Image"
+      required: false
+      default: "3bf89b5864b7471becfec8bf90f2861aaaa3e90f"
 
 jobs:
   ## Linting the code
