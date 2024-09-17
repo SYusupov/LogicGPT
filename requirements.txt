@@ -2,7 +2,7 @@
 gdown
 
 # for inference
-llama_cpp_python==0.2.77
+# llama_cpp_python==0.2.77
 
 # for finetuning and running the LLM model
 # torch==2.3.0+cu121 --find-links https://download.pytorch.org/whl/cu121
