@@ -37,6 +37,7 @@ long_instruction = ''\
     'efforts to hit home runs.'\
     'D. Babe cannot recover because moral consideration is not valid.'\
 
+
 # Test the root endpoint
 def test_read_root():
     response = client.get("/")
