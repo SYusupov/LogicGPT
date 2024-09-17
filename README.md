@@ -72,6 +72,11 @@ Then the API can be initialized with the command
    docker compose -f compose.yaml up --build
    ```
 
+A screenshot from the API with an output to a request can be seen in the image below.
+<p align="center">
+ <img src="images/app_screenshot.jpg" width="700"/>
+</p>
+
 ## 6. Containerization
 All the necessary packages and application deployment are included in `Dockerfile`. It is used in CI/CD Pipeline and during the location execution.
 
