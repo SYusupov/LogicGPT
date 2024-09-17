@@ -4,7 +4,9 @@ on:
   # Runs the pipeline on every push or a pull request to the main branch
   push:
     branches:
-      - main 
+      - main
+    paths-ignore:
+      - '**.md' # no need if just README.md update
   pull_request:
     branches:
       - main
