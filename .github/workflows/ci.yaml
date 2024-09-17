@@ -123,7 +123,7 @@ jobs:
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
             # Define the Docker image tag manually
-            DOCKER_IMAGE_TAG=${{ github.event.inputs.docker_image_tag || "3bf89b5864b7471becfec8bf90f2861aaaa3e90f" }}
+            DOCKER_IMAGE_TAG=${{ github.event.inputs.docker_image_tag || '3bf89b5864b7471becfec8bf90f2861aaaa3e90f' }}
           fi
 
           # Write the variables to the .env file
