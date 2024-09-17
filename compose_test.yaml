@@ -12,5 +12,5 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    entrypoint: ["/bin/sh", "-c", "until curl -s http://localhost:8000; do echo waiting for server to start...; sleep 5; done && pytest /app/test_api.py"]
+    entrypoint: ["/bin/sh", "-c", "pytest /app/test_api.py"]
     restart: "no"
