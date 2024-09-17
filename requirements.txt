@@ -19,6 +19,7 @@ peft==0.12.0
 fastapi
 uvicorn==0.30.6
 pytest
+httpx
 
 # for evaluation with llama_cpp and lm-evaluation-harness
 lm-eval
