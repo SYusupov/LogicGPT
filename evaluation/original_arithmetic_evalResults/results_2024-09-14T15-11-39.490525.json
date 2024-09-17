@@ -1,0 +1,537 @@
+{
+  "results": {
+    "arithmetic_1dc": {
+      "alias": "arithmetic_1dc",
+      "acc,none": 0.46,
+      "acc_stderr,none": 0.07119963311072637
+    },
+    "arithmetic_2da": {
+      "alias": "arithmetic_2da",
+      "acc,none": 0.98,
+      "acc_stderr,none": 0.019999999999999993
+    },
+    "arithmetic_2dm": {
+      "alias": "arithmetic_2dm",
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.061011875725893235
+    },
+    "arithmetic_2ds": {
+      "alias": "arithmetic_2ds",
+      "acc,none": 0.98,
+      "acc_stderr,none": 0.019999999999999983
+    },
+    "arithmetic_3da": {
+      "alias": "arithmetic_3da",
+      "acc,none": 0.98,
+      "acc_stderr,none": 0.01999999999999998
+    },
+    "arithmetic_3ds": {
+      "alias": "arithmetic_3ds",
+      "acc,none": 1.0,
+      "acc_stderr,none": 0.0
+    },
+    "arithmetic_4da": {
+      "alias": "arithmetic_4da",
+      "acc,none": 0.92,
+      "acc_stderr,none": 0.0387561713321444
+    },
+    "arithmetic_4ds": {
+      "alias": "arithmetic_4ds",
+      "acc,none": 0.92,
+      "acc_stderr,none": 0.0387561713321444
+    },
+    "arithmetic_5da": {
+      "alias": "arithmetic_5da",
+      "acc,none": 0.88,
+      "acc_stderr,none": 0.04642307659791979
+    },
+    "arithmetic_5ds": {
+      "alias": "arithmetic_5ds",
+      "acc,none": 0.88,
+      "acc_stderr,none": 0.046423076597919784
+    }
+  },
+  "group_subtasks": {
+    "arithmetic_1dc": [],
+    "arithmetic_2ds": [],
+    "arithmetic_4ds": [],
+    "arithmetic_3ds": [],
+    "arithmetic_2dm": [],
+    "arithmetic_4da": [],
+    "arithmetic_2da": [],
+    "arithmetic_5ds": [],
+    "arithmetic_3da": [],
+    "arithmetic_5da": []
+  },
+  "configs": {
+    "arithmetic_1dc": {
+      "task": "arithmetic_1dc",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_1dc",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_2da": {
+      "task": "arithmetic_2da",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_2da",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_2dm": {
+      "task": "arithmetic_2dm",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_2dm",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_2ds": {
+      "task": "arithmetic_2ds",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_2ds",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_3da": {
+      "task": "arithmetic_3da",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_3da",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_3ds": {
+      "task": "arithmetic_3ds",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_3ds",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_4da": {
+      "task": "arithmetic_4da",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_4da",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_4ds": {
+      "task": "arithmetic_4ds",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_4ds",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_5da": {
+      "task": "arithmetic_5da",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_5da",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "arithmetic_5ds": {
+      "task": "arithmetic_5ds",
+      "tag": [
+        "arithmetic"
+      ],
+      "dataset_path": "EleutherAI/arithmetic",
+      "dataset_name": "arithmetic_5ds",
+      "dataset_kwargs": {
+        "trust_remote_code": true
+      },
+      "validation_split": "validation",
+      "doc_to_text": "{{context}}",
+      "doc_to_target": "{{completion}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    }
+  },
+  "versions": {
+    "arithmetic_1dc": 1.0,
+    "arithmetic_2da": 1.0,
+    "arithmetic_2dm": 1.0,
+    "arithmetic_2ds": 1.0,
+    "arithmetic_3da": 1.0,
+    "arithmetic_3ds": 1.0,
+    "arithmetic_4da": 1.0,
+    "arithmetic_4ds": 1.0,
+    "arithmetic_5da": 1.0,
+    "arithmetic_5ds": 1.0
+  },
+  "n-shot": {
+    "arithmetic_1dc": 0,
+    "arithmetic_2da": 0,
+    "arithmetic_2dm": 0,
+    "arithmetic_2ds": 0,
+    "arithmetic_3da": 0,
+    "arithmetic_3ds": 0,
+    "arithmetic_4da": 0,
+    "arithmetic_4ds": 0,
+    "arithmetic_5da": 0,
+    "arithmetic_5ds": 0
+  },
+  "higher_is_better": {
+    "arithmetic_1dc": {
+      "acc": true
+    },
+    "arithmetic_2da": {
+      "acc": true
+    },
+    "arithmetic_2dm": {
+      "acc": true
+    },
+    "arithmetic_2ds": {
+      "acc": true
+    },
+    "arithmetic_3da": {
+      "acc": true
+    },
+    "arithmetic_3ds": {
+      "acc": true
+    },
+    "arithmetic_4da": {
+      "acc": true
+    },
+    "arithmetic_4ds": {
+      "acc": true
+    },
+    "arithmetic_5da": {
+      "acc": true
+    },
+    "arithmetic_5ds": {
+      "acc": true
+    }
+  },
+  "n-samples": {
+    "arithmetic_5da": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_3da": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_5ds": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_2da": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_4da": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_2dm": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_3ds": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_4ds": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_2ds": {
+      "original": 2000,
+      "effective": 50
+    },
+    "arithmetic_1dc": {
+      "original": 2000,
+      "effective": 50
+    }
+  },
+  "config": {
+    "model": "hf",
+    "model_args": "pretrained=unsloth/mistral-7b-bnb-4bit",
+    "model_num_parameters": 7241732096,
+    "model_dtype": "torch.bfloat16",
+    "model_revision": "main",
+    "model_sha": "3c47be0aa392c058e26ede776ecd2d5416fa5d28",
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": 50.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null,
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": null,
+  "date": 1726326357.1639192,
+  "pretty_env_info": "PyTorch version: 2.4.0+cu121\nIs debug build: False\nCUDA used to build PyTorch: 12.1\nROCM used to build PyTorch: N/A\n\nOS: Ubuntu 22.04.3 LTS (x86_64)\nGCC version: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0\nClang version: 14.0.0-1ubuntu1.1\nCMake version: version 3.30.3\nLibc version: glibc-2.35\n\nPython version: 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (64-bit runtime)\nPython platform: Linux-6.1.85+-x86_64-with-glibc2.35\nIs CUDA available: True\nCUDA runtime version: 12.2.140\nCUDA_MODULE_LOADING set to: LAZY\nGPU models and configuration: GPU 0: Tesla T4\nNvidia driver version: 535.104.05\ncuDNN version: Probably one of the following:\n/usr/lib/x86_64-linux-gnu/libcudnn.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.9.6\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\n\nCPU:\nArchitecture:                         x86_64\nCPU op-mode(s):                       32-bit, 64-bit\nAddress sizes:                        46 bits physical, 48 bits virtual\nByte Order:                           Little Endian\nCPU(s):                               2\nOn-line CPU(s) list:                  0,1\nVendor ID:                            GenuineIntel\nModel name:                           Intel(R) Xeon(R) CPU @ 2.20GHz\nCPU family:                           6\nModel:                                79\nThread(s) per core:                   2\nCore(s) per socket:                   1\nSocket(s):                            1\nStepping:                             0\nBogoMIPS:                             4399.99\nFlags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm rdseed adx smap xsaveopt arat md_clear arch_capabilities\nHypervisor vendor:                    KVM\nVirtualization type:                  full\nL1d cache:                            32 KiB (1 instance)\nL1i cache:                            32 KiB (1 instance)\nL2 cache:                             256 KiB (1 instance)\nL3 cache:                             55 MiB (1 instance)\nNUMA node(s):                         1\nNUMA node0 CPU(s):                    0,1\nVulnerability Gather data sampling:   Not affected\nVulnerability Itlb multihit:          Not affected\nVulnerability L1tf:                   Mitigation; PTE Inversion\nVulnerability Mds:                    Vulnerable; SMT Host state unknown\nVulnerability Meltdown:               Vulnerable\nVulnerability Mmio stale data:        Vulnerable\nVulnerability Reg file data sampling: Not affected\nVulnerability Retbleed:               Vulnerable\nVulnerability Spec rstack overflow:   Not affected\nVulnerability Spec store bypass:      Vulnerable\nVulnerability Spectre v1:             Vulnerable: __user pointer sanitization and usercopy barriers only; no swapgs barriers\nVulnerability Spectre v2:             Vulnerable; IBPB: disabled; STIBP: disabled; PBRSB-eIBRS: Not affected; BHI: Vulnerable (Syscall hardening enabled)\nVulnerability Srbds:                  Not affected\nVulnerability Tsx async abort:        Vulnerable\n\nVersions of relevant libraries:\n[pip3] numpy==1.26.4\n[pip3] optree==0.12.1\n[pip3] torch==2.4.0+cu121\n[pip3] torchaudio==2.4.0+cu121\n[pip3] torchsummary==1.5.1\n[pip3] torchvision==0.19.0+cu121\n[conda] Could not collect",
+  "transformers_version": "4.44.2",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<unk>",
+    "0"
+  ],
+  "tokenizer_eos_token": [
+    "</s>",
+    "2"
+  ],
+  "tokenizer_bos_token": [
+    "<s>",
+    "1"
+  ],
+  "eot_token_id": 2,
+  "max_length": 32768,
+  "task_hashes": {
+    "arithmetic_5da": "fff942ca504ee78ffb9cc5123b30d0477ac099d7804b2bbb8f0f84a6a03c1c84",
+    "arithmetic_3da": "a426fc4e5195df338ca034f8f7312471f272f75cb5b16623bc3ca8e3dd7f64ee",
+    "arithmetic_5ds": "821f723d54e461da7ad3b4a73dc4f0ba27ce7c1e8529f1452d5dd4e4e07d0717",
+    "arithmetic_2da": "c32c7775ebd91f06bbbdf2bd23bda2c799cccc306e50c4d9c5cb8aef51cf8f61",
+    "arithmetic_4da": "7acf51253c973b587ed351c53e4734ee687ef16dfb02f51596195c24338e888d",
+    "arithmetic_2dm": "d5bf5362ece592d936fced48340a605ddfb1cfc23c8ef078ae113ecc0ea8083b",
+    "arithmetic_3ds": "d978711ea0bf6bd7996767315d509e4e44793c4ae65392591c6471840bc27689",
+    "arithmetic_4ds": "5368ff337c6b4987928e6b4db6ad561a6879d2b00816cb42fff72e59dbb07c23",
+    "arithmetic_2ds": "970c221855f279dbaba1de4a3e17d83e6423179596bf4ca083e4da569ef5def4",
+    "arithmetic_1dc": "43101231846c2ccc7ef10679f64be72aa9e0bacc7af602833f8e6de945ec81ba"
+  },
+  "model_source": "hf",
+  "model_name": "unsloth/mistral-7b-bnb-4bit",
+  "model_name_sanitized": "unsloth__mistral-7b-bnb-4bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": false,
+  "chat_template": null,
+  "chat_template_sha": null,
+  "start_time": 321.677874681,
+  "end_time": 674.220446725,
+  "total_evaluation_time_seconds": "352.542572044"
+}

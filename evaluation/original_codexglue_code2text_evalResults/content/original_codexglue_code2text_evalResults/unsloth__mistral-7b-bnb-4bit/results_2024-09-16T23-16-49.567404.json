@@ -1,0 +1,397 @@
+{
+  "results": {
+    "code2text_go": {
+      "alias": "code2text_go",
+      "smoothed_bleu_4,none": 1.2587910498914314,
+      "smoothed_bleu_4_stderr,none": 0.046352705238177784
+    },
+    "code2text_java": {
+      "alias": "code2text_java",
+      "smoothed_bleu_4,none": 0.9786924984022812,
+      "smoothed_bleu_4_stderr,none": 0.11549721555797221
+    },
+    "code2text_javascript": {
+      "alias": "code2text_javascript",
+      "smoothed_bleu_4,none": 1.1025661864442422,
+      "smoothed_bleu_4_stderr,none": 0.0853483447662825
+    },
+    "code2text_php": {
+      "alias": "code2text_php",
+      "smoothed_bleu_4,none": 0.7004607195130492,
+      "smoothed_bleu_4_stderr,none": 0.1106293260966225
+    },
+    "code2text_python": {
+      "alias": "code2text_python",
+      "smoothed_bleu_4,none": 0.8676661465784241,
+      "smoothed_bleu_4_stderr,none": 0.1372072415088219
+    },
+    "code2text_ruby": {
+      "alias": "code2text_ruby",
+      "smoothed_bleu_4,none": 0.7731431632073351,
+      "smoothed_bleu_4_stderr,none": 0.13605088366958032
+    }
+  },
+  "group_subtasks": {
+    "code2text_php": [],
+    "code2text_java": [],
+    "code2text_ruby": [],
+    "code2text_javascript": [],
+    "code2text_python": [],
+    "code2text_go": []
+  },
+  "configs": {
+    "code2text_go": {
+      "task": "code2text_go",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_go",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "code2text_java": {
+      "task": "code2text_java",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_java",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "code2text_javascript": {
+      "task": "code2text_javascript",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_javascript",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "code2text_php": {
+      "task": "code2text_php",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_php",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "code2text_python": {
+      "task": "code2text_python",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_python",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "code2text_ruby": {
+      "task": "code2text_ruby",
+      "tag": [
+        "codexglue_code2text"
+      ],
+      "group": [
+        "codexglue_code2text"
+      ],
+      "dataset_path": "CM/codexglue_code2text_ruby",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text(doc):\n    inputs = \" \".join(doc[\"code_tokens\"]).replace(\"\\n\", \" \")\n    inputs = \" \".join(inputs.strip().split())\n\n    return inputs\n",
+      "doc_to_target": "def doc_to_target(doc):\n    targets = \" \".join(doc[\"docstring_tokens\"]).replace(\"\\n\", \"\")\n    targets = \" \".join(targets.strip().split())\n\n    return targets\n",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "def smoothed_bleu_4(references, predictions, **kwargs):\n    predictionMap = {}\n    goldMap = {}\n\n    for rid, pred in enumerate(predictions):\n        predictionMap[rid] = [splitPuncts(pred.strip().lower())]\n\n    for rid, row in enumerate(references):\n        goldMap[rid] = [splitPuncts(row.strip().lower())]\n\n    return bleuFromMaps(goldMap, predictionMap)[0]\n",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "num_beams": 10,
+        "max_gen_toks": 128,
+        "until": [
+          "</s>"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0
+      }
+    }
+  },
+  "versions": {
+    "code2text_go": 1.0,
+    "code2text_java": 1.0,
+    "code2text_javascript": 1.0,
+    "code2text_php": 1.0,
+    "code2text_python": 1.0,
+    "code2text_ruby": 3.0
+  },
+  "n-shot": {
+    "code2text_go": 0,
+    "code2text_java": 0,
+    "code2text_javascript": 0,
+    "code2text_php": 0,
+    "code2text_python": 0,
+    "code2text_ruby": 0
+  },
+  "higher_is_better": {
+    "code2text_go": {
+      "smoothed_bleu_4": true
+    },
+    "code2text_java": {
+      "smoothed_bleu_4": true
+    },
+    "code2text_javascript": {
+      "smoothed_bleu_4": true
+    },
+    "code2text_php": {
+      "smoothed_bleu_4": true
+    },
+    "code2text_python": {
+      "smoothed_bleu_4": true
+    },
+    "code2text_ruby": {
+      "smoothed_bleu_4": true
+    }
+  },
+  "n-samples": {
+    "code2text_go": {
+      "original": 8122,
+      "effective": 20
+    },
+    "code2text_python": {
+      "original": 14918,
+      "effective": 20
+    },
+    "code2text_javascript": {
+      "original": 3291,
+      "effective": 20
+    },
+    "code2text_ruby": {
+      "original": 1261,
+      "effective": 20
+    },
+    "code2text_java": {
+      "original": 10955,
+      "effective": 20
+    },
+    "code2text_php": {
+      "original": 14014,
+      "effective": 20
+    }
+  },
+  "config": {
+    "model": "hf",
+    "model_args": "pretrained=unsloth/mistral-7b-bnb-4bit,trust_remote_code=True",
+    "model_num_parameters": 7241732096,
+    "model_dtype": "torch.bfloat16",
+    "model_revision": "main",
+    "model_sha": "3c47be0aa392c058e26ede776ecd2d5416fa5d28",
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": "/device:GPU:0",
+    "use_cache": null,
+    "limit": 20.0,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null,
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": null,
+  "date": 1726517668.7279923,
+  "pretty_env_info": "PyTorch version: 2.4.0+cu121\nIs debug build: False\nCUDA used to build PyTorch: 12.1\nROCM used to build PyTorch: N/A\n\nOS: Ubuntu 22.04.3 LTS (x86_64)\nGCC version: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0\nClang version: 14.0.0-1ubuntu1.1\nCMake version: version 3.30.3\nLibc version: glibc-2.35\n\nPython version: 3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0] (64-bit runtime)\nPython platform: Linux-6.1.85+-x86_64-with-glibc2.35\nIs CUDA available: True\nCUDA runtime version: 12.2.140\nCUDA_MODULE_LOADING set to: LAZY\nGPU models and configuration: GPU 0: Tesla T4\nNvidia driver version: 535.104.05\ncuDNN version: Probably one of the following:\n/usr/lib/x86_64-linux-gnu/libcudnn.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.9.6\n/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.9.6\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: True\n\nCPU:\nArchitecture:                         x86_64\nCPU op-mode(s):                       32-bit, 64-bit\nAddress sizes:                        46 bits physical, 48 bits virtual\nByte Order:                           Little Endian\nCPU(s):                               2\nOn-line CPU(s) list:                  0,1\nVendor ID:                            GenuineIntel\nModel name:                           Intel(R) Xeon(R) CPU @ 2.00GHz\nCPU family:                           6\nModel:                                85\nThread(s) per core:                   2\nCore(s) per socket:                   1\nSocket(s):                            1\nStepping:                             3\nBogoMIPS:                             4000.38\nFlags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat md_clear arch_capabilities\nHypervisor vendor:                    KVM\nVirtualization type:                  full\nL1d cache:                            32 KiB (1 instance)\nL1i cache:                            32 KiB (1 instance)\nL2 cache:                             1 MiB (1 instance)\nL3 cache:                             38.5 MiB (1 instance)\nNUMA node(s):                         1\nNUMA node0 CPU(s):                    0,1\nVulnerability Gather data sampling:   Not affected\nVulnerability Itlb multihit:          Not affected\nVulnerability L1tf:                   Mitigation; PTE Inversion\nVulnerability Mds:                    Vulnerable; SMT Host state unknown\nVulnerability Meltdown:               Vulnerable\nVulnerability Mmio stale data:        Vulnerable\nVulnerability Reg file data sampling: Not affected\nVulnerability Retbleed:               Vulnerable\nVulnerability Spec rstack overflow:   Not affected\nVulnerability Spec store bypass:      Vulnerable\nVulnerability Spectre v1:             Vulnerable: __user pointer sanitization and usercopy barriers only; no swapgs barriers\nVulnerability Spectre v2:             Vulnerable; IBPB: disabled; STIBP: disabled; PBRSB-eIBRS: Not affected; BHI: Vulnerable (Syscall hardening enabled)\nVulnerability Srbds:                  Not affected\nVulnerability Tsx async abort:        Vulnerable\n\nVersions of relevant libraries:\n[pip3] numpy==1.26.4\n[pip3] optree==0.12.1\n[pip3] torch==2.4.0+cu121\n[pip3] torchaudio==2.4.0+cu121\n[pip3] torchsummary==1.5.1\n[pip3] torchvision==0.19.0+cu121\n[conda] Could not collect",
+  "transformers_version": "4.44.2",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<unk>",
+    "0"
+  ],
+  "tokenizer_eos_token": [
+    "</s>",
+    "2"
+  ],
+  "tokenizer_bos_token": [
+    "<s>",
+    "1"
+  ],
+  "eot_token_id": 2,
+  "max_length": 32768,
+  "task_hashes": {
+    "code2text_go": "d2990e8a69a61fbf117cbdecdaea29006424f10ccdd7f870f2af02fd611be40a",
+    "code2text_python": "7be641873d212758fbbd7861d78629b821e92a587a883456b2f6dd3111502f05",
+    "code2text_javascript": "fa226e7ea68c090416c5547c7b3937f3ca42b4d76c9e85a93b8a3b4827abbe36",
+    "code2text_ruby": "9b3e2728f153c29de8610378dc0d505deba91fe61618bb65b8be586e7aa28cc7",
+    "code2text_java": "7373005972b7747b8853b1da75ed8d40643798378d72c58ad8f794e9ad1b04ba",
+    "code2text_php": "abff7a5e54a7089dfe72d154b7a4959add18b848cadf3d6cd92ecd02d5532e62"
+  },
+  "model_source": "hf",
+  "model_name": "unsloth/mistral-7b-bnb-4bit",
+  "model_name_sanitized": "unsloth__mistral-7b-bnb-4bit",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": false,
+  "chat_template": null,
+  "chat_template_sha": null,
+  "start_time": 212.481456436,
+  "end_time": 11162.866561377,
+  "total_evaluation_time_seconds": "10950.385104941"
+}
