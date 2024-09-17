@@ -21,7 +21,7 @@ WORKDIR /app
 #     g++
     # && python -m pip install --upgrade pip setuptools wheel
 
-RUN apt-get update && apt-get install -y g++
+RUN apt-get update && apt-get install -y g++ curl
 
 # RUN !CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install  llama-cpp-python --no-cache-dir
 
