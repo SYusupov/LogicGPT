@@ -40,22 +40,24 @@ jobs:
     env: 
       TO_BUILD_DOCKER: false
 
-    if: ${{ env.TO_BUILD_DOCKER == true }}
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        if: ${{ $TO_BUILD_DOCKER == true }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        if: ${{ $TO_BUILD_DOCKER == true }}
       
       - name: Login to Docker Hub
         uses: docker/login-action@v2
+        if: ${{ $TO_BUILD_DOCKER == true }}
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker image
+        if: ${{ $TO_BUILD_DOCKER == true }}
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }}
@@ -71,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       TO_BUILD_DOCKER: false
-      docker_image_tag: '3bf89b5864b7471becfec8bf90f2861aaaa3e90f'
+      PREV_IMAGE_TAG: '3bf89b5864b7471becfec8bf90f2861aaaa3e90f'
     # needs: docker_build
 
     steps:
@@ -113,12 +115,12 @@ jobs:
         run: |
           DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           
-          if [ env.TO_BUILD_DOCKER == true ]; then
+          if [ $TO_BUILD_DOCKER == true ]; then
             # dynamically set the image tag based on the commit ID
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
             # Define the Docker image tag manually
-            DOCKER_IMAGE_TAG=$docker_image_tag
+            DOCKER_IMAGE_TAG=$PREV_IMAGE_TAG
           fi
 
           # Write the variables to the .env file
