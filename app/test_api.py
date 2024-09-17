@@ -50,9 +50,9 @@ def test_valid_inference():
     instruction = """
     How many four-digit numbers greater than 2999 can be formed such that the
      product of the middle two digits exceeds 5?"""
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"instruction": instruction}
+        params={"instruction": instruction}
     )
 
     assert response.status_code == 200
@@ -70,9 +70,9 @@ def test_inference_with_long_instruction_and_input():
     # failed, 422
 
     input_text = "Choose A, B, C or D as your solution."
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"instruction": long_instruction, "input": input_text}
+        params={"instruction": long_instruction, "input": input_text}
     )
 
     assert response.status_code == 200
@@ -87,9 +87,9 @@ def test_inference_with_long_instruction_and_input():
 # Test inference with missing instruction
 def test_inference_missing_instruction():
     input_text = "Choose A, B, C or D as your solution."
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"instruction": "", "input": input_text}
+        params={"instruction": "", "input": input_text}
     )
 
     # FastAPI will return a 422 if required fields are missing or invalid
@@ -99,9 +99,9 @@ def test_inference_missing_instruction():
 # Test inference with a long input text
 def test_inference_with_long_input():
     # failed, 422
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"instruction": long_instruction}
+        params={"instruction": long_instruction}
     )
 
     assert response.status_code == 200
@@ -115,9 +115,9 @@ def test_inference_with_long_input():
 
 # Test an invalid request structure
 def test_invalid_request_structure():
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"invalid_field": "test"}
+        params={"invalid_field": "test"}
     )
 
     # FastAPI should raise a 422 error for missing required fields
@@ -129,9 +129,9 @@ def test_empty_model_response():
     # failed, 422
     instruction = ""
     input_text = ""
-    response = client.post(
+    response = client.get(
         "/ask",
-        json={"instruction": instruction, "input": input_text}
+        params={"instruction": instruction, "input": input_text}
     )
 
     assert response.status_code == 200
