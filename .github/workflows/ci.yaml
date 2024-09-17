@@ -64,6 +64,7 @@ jobs:
   
       # Clean up Docker system after building and pushing the image
       - name: Clean up Docker
+        if: ${{ env.TO_BUILD_DOCKER == true }}
         run: |
           docker system prune -af --volumes
 
@@ -115,12 +116,12 @@ jobs:
         run: |
           DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           
-          if [ env.TO_BUILD_DOCKER == true ]; then
+          if [ $TO_BUILD_DOCKER == true ]; then
             # dynamically set the image tag based on the commit ID
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
             # Define the Docker image tag manually
-            DOCKER_IMAGE_TAG=env.PREV_IMAGE_TAG
+            DOCKER_IMAGE_TAG=$PREV_IMAGE_TAG
           fi
 
           # Write the variables to the .env file
