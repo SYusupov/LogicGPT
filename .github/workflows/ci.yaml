@@ -8,16 +8,6 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      build_docker_image:
-        description: "Whether to build the Docker image or not"
-        required: false
-        default: false
-      docker_image_tag:
-        description: "Tag of the latest correct Docker Image"
-        required: false
-        default: "3bf89b5864b7471becfec8bf90f2861aaaa3e90f"
 
 jobs:
   ## Linting the code
@@ -47,8 +37,10 @@ jobs:
   docker_build:
     name: Build and Push Docker Image 
     runs-on: ubuntu-latest
+    env: 
+      to_build_docker: false
 
-    if: ${{ github.event.inputs.build_docker_image || false }}
+    if: $to_build_docker
 
     steps:
       - name: Checkout Code
@@ -77,7 +69,10 @@ jobs:
   test_api_with_model:
     name: Download Model and Test API
     runs-on: ubuntu-latest
-    needs: docker_build
+    env: 
+      to_build_docker: false
+      docker_image_tag: '3bf89b5864b7471becfec8bf90f2861aaaa3e90f'
+    # needs: docker_build
 
     steps:
       - name: Checkout Code
@@ -118,12 +113,12 @@ jobs:
         run: |
           DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           
-          if [ ${{ github.event.inputs.build_docker_image || false }} == true ]; then
+          if [ $to_build_docker ]; then
             # dynamically set the image tag based on the commit ID
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
             # Define the Docker image tag manually
-            DOCKER_IMAGE_TAG=${{ github.event.inputs.docker_image_tag || '3bf89b5864b7471becfec8bf90f2861aaaa3e90f' }}
+            DOCKER_IMAGE_TAG=$docker_image_tag
           fi
 
           # Write the variables to the .env file
