@@ -43,34 +43,42 @@ The setup for the evaluation of the **fine-tuned model** was as follows:
 To evaluate the original Mistral 7B **before fine-tuning**, I used Google Colab as it is faster, and the evaluation of both models is possible this way. 
 The notebook is available at `evaluation/original_model_evaluation.ipynb`.
 
-In particular, I evaluated both models on datasets that are similar to the datasets on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with Smoothed BLEU-4, and the rest of the datasets were evaluated with Accuracy. 20 questions per programming language for `codeXglue` and 50 questions per question type for other datasets were asked from the 2 models (not the whole dataset due to time limitations), the results are visualized with the script `evaluation/visualization.ipynb`. 
+In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with Smoothed BLEU-4, and the rest of the datasets were evaluated with Accuracy. 20 questions per programming language for `codeXglue` and 50 questions per question type for other datasets were asked from the 2 models (not the whole dataset due to time limitations). The datasets' results can be seen in the folder `evaluation`. They are visualized with the script `evaluation/visualization.ipynb`. 
 
-<img src="images/accuracy_results.png" width="500"/>
-<img src="images/images/codeXglue_results.png" width="500"/>
+As can be seen from the plots 
+
+<p align="center">
+ <img src="images/accuracy_results.png" width="700"/>
+</p>
+
+<p align="center">
+ <img src="images/images/codeXglue_results.png" width="700"/>
+</p>
 
 ## 5. API Creation
 The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp. The GGUF file could not be loaded into this repository due to size limitations of 2GB. Therefore it is downloaded from Google Drive before running the API.
 
-To run locally, Docker Hub credentials where the docker-image is stored should be set up with the following commands for Linux/Ubuntu environments:
+To run locally, Docker Hub credentials where the docker-image is stored, and the latest Docker-Image commit-id should be written in the file `.env`:
    ```bash
-   set DOCKERHUB_USERNAME=dockerhub_username
-   set DOCKERHUB_PASSWORD=dockerhub_password
+   DOCKERHUB_USERNAME=dockerhub_username
+   DOCKERHUB_PASSWORD=dockerhub_password
+   DOCKER_IMAGE_TAG=tag
    ```
-Also, the latest commit-id should used in the code, so it should also be saved e.g. with:
-   ```bash
-   echo "DOCKER_IMAGE_TAG=d3530885b6ae868333e0e618af2910f9085d6dd7" >> .env
-   ```
+
 Then the API can be initialized with the command
    ```bash
    docker compose -f compose.yaml up --build
    ```
 
 ## 6. Containerization
+All the necessary packages and application deployment are included in `Dockerfile`. It is used in CI/CD Pipeline and during the location execution.
 
 ## 7. CI/CD Pipeline with GitHub Actions
 The pipeline (`.github/workflows/ci.yaml`) includes all necessary steps, including linting the Python code, building the Docker image, downloading the model, starting the API, and running the tests.
 
-In case no changes were made to Dockerfile, there is no need to build the docker-image again (takes around 10 minutes), therefore we can make these changes in `.github/workflows/ci.yaml`:
-1. the workflow `docker_build` (lines 36-63)
-2. the previous commit-id should be used, i.e. line 111 should be commented out, the previous commit-id should be used as `DOCKER_IMAGE_TAG`, and line 114 should be commented.
-3. comment line 69 since we are not running `docker-build`.
+In case no changes were made to Dockerfile, there is no need to build the docker-image again (takes around 10 minutes), therefore I included the option of not skipping the job `docker_build` in `.github/workflows/ci.yaml`. It can be done by:
+1. setting all definitions of `TO_BUILD_DOCKER` to `false`, like so `TO_BUILD_DOCKER: false`,
+2. setting the definition of `PREV_IMAGE_TAG` to the latest Docker image's tag, no need to change if not changed recently
+3. comment line 79 (`needs: docker_build` in the job `test_api_with_model`), since we are not running `docker-build`.
+
+Undo the above steps to rebuild and save a new Docker image.
