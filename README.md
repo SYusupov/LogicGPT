@@ -45,15 +45,17 @@ The notebook is available at `evaluation/original_model_evaluation.ipynb`.
 
 In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with Smoothed BLEU-4, and the rest of the datasets were evaluated with Accuracy. 20 questions per programming language for `codeXglue` and 50 questions per question type for other datasets were asked from the 2 models (not the whole dataset due to time limitations). The datasets' results can be seen in the folder `evaluation`. They are visualized with the script `evaluation/visualization.ipynb`. 
 
-As can be seen from the plots 
-
 <p align="center">
  <img src="images/accuracy_results.png" width="700"/>
 </p>
 
+As can be seen from the plot on accuracies, the Fine-tuned model either matches or outperforms the Original Model for many tasks. However for some of them the original had slightly (e.g. `mc_taco` and `arithmetic_2dm`) or much (e.g. `logiqa`) better performances. One explanation for that would be that training on various tasks at once affected performance on individual tasks, so there are generalization issues or there is overfitting.
+
 <p align="center">
- <img src="images/images/codeXglue_results.png" width="700"/>
+ <img src="images/codeXglue_results.png" width="700"/>
 </p>
+
+We can observe more significant improvements for the fine-tuned model in the code-related tasks. In every dataset, the Fine-tuned model significantly outperforms the Original model. The fine-tuning is especially good for code-to-text task in Go language, with around 5 times improvement. In contrast, the model performed worst for PHP language, though it is still much better than the original model.
 
 ## 5. API Creation
 The API was implemented using FastAPI. For inference I am loading the GGUF file created in the notebook with Llamma.cpp. The GGUF file could not be loaded into this repository due to size limitations of 2GB. Therefore it is downloaded from Google Drive before running the API.
