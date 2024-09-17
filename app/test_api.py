@@ -46,13 +46,13 @@ def test_read_root():
 
 # Test valid model inference
 def test_valid_inference():
+    # failed, 422
     instruction = """
     How many four-digit numbers greater than 2999 can be formed such that the
      product of the middle two digits exceeds 5?"""
-    input_text = ""
     response = client.post(
         "/ask",
-        json={"instruction": instruction, "input": input_text}
+        json={"instruction": instruction}
     )
 
     assert response.status_code == 200
@@ -67,6 +67,7 @@ def test_valid_inference():
 
 # Test inference with input provided
 def test_inference_with_long_instruction_and_input():
+    # failed, 422
 
     input_text = "Choose A, B, C or D as your solution."
     response = client.post(
@@ -97,9 +98,10 @@ def test_inference_missing_instruction():
 
 # Test inference with a long input text
 def test_inference_with_long_input():
+    # failed, 422
     response = client.post(
         "/ask",
-        json={"instruction": long_instruction, "input": ""}
+        json={"instruction": long_instruction}
     )
 
     assert response.status_code == 200
@@ -124,6 +126,7 @@ def test_invalid_request_structure():
 
 # Test when model returns no tokens (edge case)
 def test_empty_model_response():
+    # failed, 422
     instruction = ""
     input_text = ""
     response = client.post(
