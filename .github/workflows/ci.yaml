@@ -78,7 +78,7 @@ jobs:
   test_api_with_model:
     name: Download Model and Test API
     runs-on: ubuntu-latest
-    # needs: docker_build
+    # needs: docker_build # comments this if not running docker_build ($TO_BUILD_DOCKER = false)
 
     steps:
       - name: Checkout Code
