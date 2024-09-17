@@ -13,6 +13,10 @@ on:
     branches:
       - main
 
+env:
+  TO_BUILD_DOCKER: false
+  PREV_IMAGE_TAG: '3bf89b5864b7471becfec8bf90f2861aaaa3e90f'
+
 jobs:
   ## Linting the code
   lint:
@@ -41,8 +45,6 @@ jobs:
   docker_build:
     name: Build and Push Docker Image 
     runs-on: ubuntu-latest
-    env: 
-      TO_BUILD_DOCKER: false
 
     steps:
       - name: Checkout Code
@@ -76,9 +78,6 @@ jobs:
   test_api_with_model:
     name: Download Model and Test API
     runs-on: ubuntu-latest
-    env: 
-      TO_BUILD_DOCKER: false
-      PREV_IMAGE_TAG: '3bf89b5864b7471becfec8bf90f2861aaaa3e90f'
     # needs: docker_build
 
     steps:
