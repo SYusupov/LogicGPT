@@ -102,11 +102,11 @@ A screenshot from the API with an output to a request can be seen in the image b
 All the necessary packages and application deployment are included in `Dockerfile`. It is used in CI/CD Pipeline and during the location execution.
 
 ## 7. CI/CD Pipeline with GitHub Actions
-The pipeline (`.github/workflows/ci.yaml`) includes all necessary steps, including linting the Python code, building the Docker image, downloading the model, starting the API, and running the tests. As can be seen from [this](https://github.com/SYusupov/LogicGPT/actions/runs/10904472957/job/30261676289) Github Actions page of one of the latest commits, all the jobs are running successfully.
+The pipeline (`.github/workflows/ci.yaml`) includes all necessary steps, including linting the Python code, building the Docker image, downloading the model, starting the API, and running the tests. As can be seen from [this](https://github.com/SYusupov/LogicGPT/actions/runs/10907500609/job/30271295071) Github Actions page of one of the latest commits, all the jobs are running successfully.
 
 In case no changes were made to Dockerfile, there is no need to build the docker-image again (takes around 10 minutes), therefore I included the option of not skipping the job `docker_build` in `.github/workflows/ci.yaml`. It can be done by:
-1. setting all definitions of `TO_BUILD_DOCKER` to `false`, like so `TO_BUILD_DOCKER: false`,
-2. setting the definition of `PREV_IMAGE_TAG` to the latest Docker image's tag, no need to change if not changed recently
-3. comment line 79 (`needs: docker_build` in the job `test_api_with_model`), since we are not running `docker-build`.
+1. setting the definition of `TO_BUILD_DOCKER` to `false` on line 17
+2. setting the definition of `PREV_IMAGE_TAG` to the latest Docker image's tag on line 18, no need to change if not changed recently
+3. comment line 81 (`needs: docker_build` in the job `test_api_with_model`), since we are not running `docker-build`.
 
 Undo the above steps to rebuild and save a new Docker image.
