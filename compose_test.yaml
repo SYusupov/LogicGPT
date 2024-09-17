@@ -1,0 +1,16 @@
+services:
+  server:
+    image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+      - ./model_files:/model_files
+    
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    entrypoint: ["/bin/sh", "-c", "until curl -s http://localhost:8000; do echo waiting for server to start...; sleep 5; done && pytest /app/test_api.py"]
+    restart: "no"
