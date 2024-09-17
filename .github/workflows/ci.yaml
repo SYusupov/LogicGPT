@@ -48,7 +48,7 @@ jobs:
     name: Build and Push Docker Image 
     runs-on: ubuntu-latest
 
-    if: ${{ github.event.inputs.build_docker_image || 'true' }}
+    if: ${{ github.event.inputs.build_docker_image || 'false' }}
 
     steps:
       - name: Checkout Code
@@ -118,7 +118,7 @@ jobs:
         run: |
           DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
           
-          if [ ${{ github.event.inputs.build_docker_image || 'true' }} == "true" ]; then
+          if [ ${{ github.event.inputs.build_docker_image || 'false' }} == "true" ]; then
             # dynamically set the image tag based on the commit ID
             DOCKER_IMAGE_TAG=$(git rev-parse HEAD)
           else
