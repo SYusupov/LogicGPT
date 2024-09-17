@@ -17,13 +17,14 @@ The dataset was chosen because:
 - Much preprocessing was done to the dataset to ensure a high-quality, which includes:
    - pairs of sentences with similarity above 80% were removed, the similarity was computed with Sentence Transformers and using keyword search
    - questions similar to the questions in Hugging Face benchmark test sets were removed
+- Change in performance across a variety of tasks can be evaluated.
 
 ### Fine-tuning Methodology
 The finetuning was done using:
 - Unsloth, a framework that facilitates and speeds up fine-tuning,
 - SFTTrainer of HuggingFace, Supervised Fine-tuning Trainer
-I used LoRA approach for finetuning.
-The finetuning is done in the notebook in [finetuning.ipynb](finetuning.ipynb) in Google Colab with the free NVIDIA T4 GPU.
+I used the **LoRA** approach for finetuning. The rank parameter was set at **16**. Larger values can be used to improve performance.
+The finetuning is done in the notebook in [finetuning.ipynb](https://github.com/SYusupov/LogicGPT/blob/main/finetuning.ipynb) in Google Colab with the free NVIDIA T4 GPU.
 
 ## 4. Model Evaluation
 To evaluate Mistral 7B before and after fine-tuning, I used the framework [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). 
@@ -43,7 +44,11 @@ The setup for the evaluation of the **fine-tuned model** was as follows:
 To evaluate the original Mistral 7B **before fine-tuning**, I used Google Colab as it is faster, and the evaluation of both models is possible this way. 
 The notebook is available at `evaluation/original_model_evaluation.ipynb`.
 
-In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with Smoothed BLEU-4, and the rest of the datasets were evaluated with Accuracy. 20 questions per programming language for `codeXglue` and 50 questions per question type for other datasets were asked from the 2 models (not the whole dataset due to time limitations). The datasets' results can be seen in the folder `evaluation`. They are visualized with the script `evaluation/visualization.ipynb`. 
+In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. 
+
+The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with **Smoothed BLEU-4**, and the rest of the datasets were evaluated with **Accuracy**. `codeXglue` is evaluated with Smoothed BLEU-4 because the output natural language generation so the outputs might not necessarily be the same. The metric looks at the usage of n-grams between expected and actual outputs without considering the order between them. In contrast, the other tasks are multiple-choice, like in the case of reading comprehension, or have discrete outputs like in the case of arithmetics tasks.
+
+20 questions per programming language for `codeXglue` and 50 questions per question type for other datasets were asked from the 2 models (not the whole dataset due to time limitations). The datasets' results can be seen in the folder `evaluation`. They are visualized with the script `evaluation/visualization.ipynb`. 
 
 <p align="center">
  <img src="images/accuracy_results.png" width="700"/>
@@ -67,10 +72,26 @@ To run locally, Docker Hub credentials where the docker-image is stored, and the
    DOCKER_IMAGE_TAG=tag
    ```
 
-Then the API can be initialized with the command
+And you should login to docker from the command prompt with `docker login`.
+
+Also the model file should be downloaded with this command:
+   ```bash
+   python -m pip install gdown
+   gdown 1WGmDmHXTCmIqYHL-Jla3GUgtz_yFgzk1 -O ./model_files/unsloth.Q4_K_M.gguf
+   chmod -R 755 ./model_files
+   ```
+
+Then the API can be initialized with the command below. The API will be accessible at [http://localhost:8000/docs](http://localhost:8000/docs)
    ```bash
    docker compose -f compose.yaml up --build
    ```
+
+Alternatively, the tests can be run with
+   ```bash
+   docker compose -f compose_test.yaml up --build
+   ```
+
+Don't forget to stop the API after you are done with `docker compose down`. 
 
 A screenshot from the API with an output to a request can be seen in the image below.
 <p align="center">
@@ -81,7 +102,7 @@ A screenshot from the API with an output to a request can be seen in the image b
 All the necessary packages and application deployment are included in `Dockerfile`. It is used in CI/CD Pipeline and during the location execution.
 
 ## 7. CI/CD Pipeline with GitHub Actions
-The pipeline (`.github/workflows/ci.yaml`) includes all necessary steps, including linting the Python code, building the Docker image, downloading the model, starting the API, and running the tests.
+The pipeline (`.github/workflows/ci.yaml`) includes all necessary steps, including linting the Python code, building the Docker image, downloading the model, starting the API, and running the tests. As can be seen from [this](https://github.com/SYusupov/LogicGPT/actions/runs/10904472957/job/30261676289) Github Actions page of one of the latest commits, all the jobs are running successfully.
 
 In case no changes were made to Dockerfile, there is no need to build the docker-image again (takes around 10 minutes), therefore I included the option of not skipping the job `docker_build` in `.github/workflows/ci.yaml`. It can be done by:
 1. setting all definitions of `TO_BUILD_DOCKER` to `false`, like so `TO_BUILD_DOCKER: false`,
