@@ -88,7 +88,7 @@ jobs:
       - name: Download model from Google Drive
         run: |
           mkdir -p model_files
-          gdown 1OWYw131Ch2I-Cti4dpgRgfwHNw_mQHS- -O ./model_files/unsloth.Q4_K_M.gguf
+          gdown 1WGmDmHXTCmIqYHL-Jla3GUgtz_yFgzk1 -O ./model_files/unsloth.Q4_K_M.gguf
 
       - name: Set correct permissions for model files
         run: |
