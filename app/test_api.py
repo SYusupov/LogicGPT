@@ -38,15 +38,16 @@ long_instruction = ''\
     'D. Babe cannot recover because moral consideration is not valid.'\
 
 
-# Test the root endpoint
+
 def test_read_root():
+    # Test the root endpoint
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"Hello": "World"}
 
 
-# Test valid model inference
 def test_valid_inference():
+    # Test valid model inference
     instruction = """
     How many four-digit numbers greater than 2999 can be formed such that the
      product of the middle two digits exceeds 5?"""
@@ -65,8 +66,8 @@ def test_valid_inference():
     assert len(reasoned_response_part) > 0
 
 
-# Test inference with input provided
 def test_inference_with_long_instruction_and_input():
+    # Test inference with input provided
 
     input_text = "Choose A, B, C or D as your solution."
     response = client.post(
@@ -83,8 +84,8 @@ def test_inference_with_long_instruction_and_input():
     assert len(reasoned_response_part) > 0
 
 
-# Test inference with missing instruction
 def test_inference_missing_instruction():
+    # Test inference with missing instruction
     input_text = "Choose A, B, C or D as your solution."
     response = client.post(
         "/ask",
@@ -95,8 +96,8 @@ def test_inference_missing_instruction():
     assert response.status_code == 422
 
 
-# Test inference with a long input text
 def test_inference_with_long_input():
+    # Test inference with a long input text
     response = client.post(
         "/ask",
         params={"instruction": long_instruction}
@@ -111,8 +112,8 @@ def test_inference_with_long_input():
     assert len(reasoned_response_part) > 0
 
 
-# Test an invalid request structure
 def test_invalid_request_structure():
+    # Test an invalid request structure
     response = client.post(
         "/ask",
         params={"invalid_field": "test"}
@@ -122,8 +123,8 @@ def test_invalid_request_structure():
     assert response.status_code == 422
 
 
-# Test when model returns no tokens (edge case)
 def test_empty_model_response():
+    # Test when model returns no tokens (edge case)
     instruction = ""
     input_text = ""
     response = client.post(
