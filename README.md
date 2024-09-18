@@ -13,8 +13,8 @@ The quantization was performed to do the inference quickly on my local machine w
 ### Dataset
 For fine-tuning, I used the [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus) dataset. It consists of questions on Math, Science, reading comprehension, coding, and Logic.
 The dataset was chosen because:
-- I heard that LLMs do not show good performance for logical reasoning and maths questions. I was curious if I can improve them by finetuning myself.
-- Much preprocessing was done to the dataset to ensure a high-quality, which includes:
+- I heard that LLMs do not perform well when answering logical reasoning and maths questions. I was curious if I could improve them by fine-tuning myself.
+- Much preprocessing was done to the dataset to ensure a high quality, which includes:
    - pairs of sentences with similarity above 80% were removed, the similarity was computed with Sentence Transformers and using keyword search
    - questions similar to the questions in Hugging Face benchmark test sets were removed
 - Change in performance across a variety of tasks can be evaluated.
@@ -36,15 +36,15 @@ The setup for the evaluation of the **fine-tuned model** was as follows:
    ```bash
    python -m llama_cpp.server --model model/unsloth.Q4_K_M.gguf
    ```
-2. Run the evaluation with lm-evaluation-harness by passing the local server address of the model:
+2. Run the evaluation with lm-evaluation-harness passing the local server address of the model:
    ```bash
-   lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks arithmetic --limit 10 --log_samples --output_path 'finetuned_eval_arithmetic_results'
+   lm_eval --model gguf --model_args base_url=http://localhost:8000 --tasks <task-name> --limit <number-of-questions> --log_samples --output_path '<results-output-path>'
    ```
 
 To evaluate the original Mistral 7B **before fine-tuning**, I used Google Colab as it is faster, and the evaluation of both models is possible this way. 
-The notebook is available at `evaluation/original_model_evaluation.ipynb`.
+The notebook is available at [evaluation/original_model_evaluation.ipynb](https://github.com/SYusupov/LogicGPT/blob/main/evaluation/original_model_evaluation.ipynb).
 
-In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset `sciq`, comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco` and logical reasoning questions from `logiqa`. 
+In particular, I evaluated both models on datasets similar to those on which the fine-tuning was done. They included science questions from the dataset [sciq]([url](https://huggingface.co/datasets/allenai/sciq)), comments generation for code from `codeXglue`, numerical calculations from `arithmetic`, reading comprehension questions from `mc_taco`, and logical reasoning questions from `logiqa`. 
 
 The evaluation metrics were predefined by the framework, with outputs for `codeXglue` evaluated with **Smoothed BLEU-4**, and the rest of the datasets were evaluated with **Accuracy**. `codeXglue` is evaluated with Smoothed BLEU-4 because the output natural language generation so the outputs might not necessarily be the same. The metric looks at the usage of n-grams between expected and actual outputs without considering the order between them. In contrast, the other tasks are multiple-choice, like in the case of reading comprehension, or have discrete outputs like in the case of arithmetics tasks.
 
