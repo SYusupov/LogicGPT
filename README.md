@@ -14,6 +14,11 @@ Quantization was performed to enable faster inference on my local machine withou
 ### Dataset
 For fine-tuning, I used the [Open-Platypus](https://huggingface.co/datasets/garage-bAInd/Open-Platypus) dataset. It contains questions from diverse domains such as math, science, reading comprehension, coding, and logic.
 
+The number of training sets of questions and answers for each of the data sources can be seen in the plot below. The data sources are not uniformly distributed at all.
+<p align="center">
+ <img src="images/accuracy_results.png" width="700"/>
+</p>
+
 The dataset was chosen for several reasons:
 - **LLM performance on logic and math**: LLMs often struggle with logical reasoning and math tasks, so I wanted to see if I could improve this through fine-tuning.
 - **Preprocessing**: The dataset underwent extensive preprocessing by the authors, including:
