@@ -16,7 +16,7 @@ For fine-tuning, I used the [Open-Platypus](https://huggingface.co/datasets/gara
 
 The number of training sets of questions and answers for each of the data sources can be seen in the plot below. The data sources are not uniformly distributed at all.
 <p align="center">
- <img src="images/accuracy_results.png" width="700"/>
+ <img src="images/data_distribution.png" width="700"/>
 </p>
 
 The dataset was chosen for several reasons:
