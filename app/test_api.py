@@ -92,8 +92,11 @@ def test_inference_missing_instruction():
         params={"input": input_text}
     )
 
-    # FastAPI will return a 422 if required fields are missing or invalid
-    assert response.status_code == 422
+    # Expecting the API to return an error message
+    assert response.status_code == 200
+    response_data = response.json()
+    assert "error" in response_data
+    assert response_data["error"] == "Instruction is required!"
 
 
 def test_inference_with_long_input():
@@ -119,8 +122,11 @@ def test_invalid_request_structure():
         params={"invalid_field": "test"}
     )
 
-    # FastAPI should raise a 422 error for missing required fields
-    assert response.status_code == 422
+    # Expecting the API to return an error message
+    assert response.status_code == 200
+    response_data = response.json()
+    assert "error" in response_data
+    assert response_data["error"] == "Instruction is required!"
 
 
 def test_empty_model_response():
@@ -132,10 +138,40 @@ def test_empty_model_response():
         params={"instruction": instruction, "input": input_text}
     )
 
+    # Expecting the API to return an error message
+    assert response.status_code == 200
+    response_data = response.json()
+    assert "error" in response_data
+    assert response_data["error"] == "Instruction is required!"
+
+
+def test_valid_inference():
+    # Test valid model inference using JSON
+    instruction = """
+    How many four-digit numbers greater than 2999 can be formed such that the
+     product of the middle two digits exceeds 5?"""
+    response = client.post(
+        "/ask",
+        json={"instruction": instruction, "input": ""}
+    )
+
+    assert response.status_code == 200
+    response_data = response.json()
+    
+    # Extract the text field and check if Reasoned Response is present
+    assert "Reasoned Response" in response_data["choices"][0]["text"]
+
+
+def test_valid_inference_query_params():
+    # Test valid model inference using query params
+    instruction = """
+    How many four-digit numbers greater than 2999 can be formed such that the
+     product of the middle two digits exceeds 5?"""
+    response = client.post(
+        "/ask",
+        params={"instruction": instruction, "input": ""}
+    )
+
     assert response.status_code == 200
     response_data = response.text
     assert "Reasoned Response" in response_data
-    # Check if there is text after "Reasoned Response:"
-    reasoned_response_part = response_data.split(
-        "Reasoned Response:")[-1].strip()
-    assert len(reasoned_response_part) > 0

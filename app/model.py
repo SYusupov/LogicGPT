@@ -16,8 +16,8 @@ platypus_prompt = """
     {}"""
 
 num_cores = os.cpu_count()
-n_threads = max(1, num_cores // 2)
-print('n_threads', n_threads)
+# n_threads = max(1, num_cores // 2)
+# print('n_threads', n_threads)
 # print('supports cuda: ', Llama.supports_cuda())
 
 llm = Llama(
@@ -25,11 +25,11 @@ llm = Llama(
     use_mmap=True,
     # use_gpu=True,
     n_batch=4,
-    n_threads=n_threads
+    n_threads=num_cores
 )
 
 
-def model_inference(instruction: str, input: str):
+def model_inference(instruction: str, input: str, max_tokens: int=200):
 
     input = platypus_prompt.format(
         instruction,
@@ -37,5 +37,5 @@ def model_inference(instruction: str, input: str):
         ""  # output - leave this blank for generation!
     )
 
-    output = llm(input, max_tokens=100, echo=True)
+    output = llm(input, max_tokens=max_tokens, echo=True)
     return output
