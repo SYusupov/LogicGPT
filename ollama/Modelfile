@@ -1,0 +1,1 @@
+FROM ../model_files/unsloth.Q4_K_M.gguf

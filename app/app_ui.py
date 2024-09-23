@@ -1,41 +1,98 @@
-import streamlit as st
 import requests
+import json
+import streamlit as st
 
-# Define the FastAPI URL (assuming it's running locally)
-API_URL = "http://localhost:8000/ask"
+# Define the platypus_prompt
+platypus_prompt = """
+Below is a question or task that requires logical reasoning to solve,
+along with additional context or information. Provide a detailed and
+well-reasoned response that demonstrates clear logical thinking.
 
-# Streamlit UI configuration
-st.title("LogicGPT Model Inference")
-st.write("This interface allows you to interact with the LogicGPT model by providing instructions and optional input.")
+### Question/Task:
+{}
 
-# Create a form for the user to input data
-with st.form(key="inference_form"):
-    instruction = st.text_input("Instruction", placeholder="Enter your task or question here.")
-    input_text = st.text_area("Input (Optional)", placeholder="Enter additional context or input here.")
+### Input:
+{}
+
+### Reasoned Response:
+"""
+
+def generate_response(prompt, model='mistral'):
+    url = 'http://localhost:11434/api/generate'
+    headers = {'Content-Type': 'application/json'}
+    data = {
+        "model": model,
+        "prompt": prompt
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data), stream=True)
     
-    # Submit button for the form
-    submit_button = st.form_submit_button(label="Ask the Model")
+    for line in response.iter_lines():
+        if line:
+            # Each line is a JSON object
+            json_data = json.loads(line.decode('utf-8'))
+            word = json_data.get('response', '')
+            done = json_data.get('done', False)
+            if word:
+                # Yield words or tokens as they come
+                yield word
+            if done:
+                break
 
-# When the form is submitted, make a POST request to the FastAPI app
-if submit_button:
-    if instruction.strip() == "":
-        st.warning("Instruction is required to make a query!")
-    else:
-        with st.spinner("Fetching response from the model..."):
-            # Send data to FastAPI app as JSON
-            response = requests.post(API_URL, json={"instruction": instruction, "input": input_text})
-            
-            # Handle the response
-            if response.status_code == 200:
-                result = response.json()
-                
-                # Extract the Reasoned Response and completion tokens
-                reasoned_response = result["choices"][0]["text"].split("### Reasoned Response:")[-1].strip()
-                completion_tokens = result["usage"]["completion_tokens"]
-                
-                # Display the Reasoned Response and completion tokens
-                st.success("Model response:")
-                st.write(f"Reasoned Response: {reasoned_response}")
-                st.write(f"Completion Tokens: {completion_tokens}")
-            else:
-                st.error(f"Error: {response.status_code} - {response.text}")
+def main():
+    st.title("Streamlit Chatbot with Ollama")
+
+    # Initialize session state to store the conversation
+    if 'messages' not in st.session_state:
+        st.session_state['messages'] = []
+
+    # Input form for user to type their message
+    with st.form(key='chat_form'):
+        question_task = st.text_area("Question/Task:", key='question_task')
+        input_text = st.text_area("Input (optional):", key='input_text')
+        submit_button = st.form_submit_button(label='Send')
+
+    # Error if both fields are empty
+    if submit_button and not question_task and not input_text:
+        st.error("Please provide a 'Question/Task' before sending.")
+
+    if submit_button and question_task:
+        # Construct the prompt using platypus_prompt
+        prompt = platypus_prompt.format(question_task, input_text if input_text else '')
+
+        # Append user's message to the conversation
+        st.session_state['messages'].append({
+            'sender': 'user',
+            'question_task': question_task,
+            'input_text': input_text if input_text else None  # Handle empty input case
+        })
+
+        # Placeholder for the bot's response
+        bot_message_placeholder = st.empty()
+
+        # Generate the bot's response and display it word by word
+        bot_response = ''
+        for word in generate_response(prompt):
+            bot_response += word
+            # Update the placeholder with the new bot response
+            bot_message_placeholder.markdown(f"**Bot:** {bot_response}")
+        
+        # Append bot's response to the conversation
+        st.session_state['messages'].append({'sender': 'bot', 'text': bot_response})
+
+    # Display conversation history in grey with horizontal lines between each response
+    
+    if st.session_state['messages']:
+        st.markdown("### History")
+        st.markdown("---")
+    
+    for message in st.session_state['messages']:
+        if message['sender'] == 'user':
+            st.markdown(f"<span style='color: grey;'>**Question/Task:** {message['question_task']}</span>", unsafe_allow_html=True)
+            if message['input_text']:
+                st.markdown(f"<span style='color: grey;'>**Input:** {message['input_text']}</span>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<span style='color: grey;'>**Bot:** {message['text']}</span>", unsafe_allow_html=True)
+            st.markdown("<hr>", unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()

@@ -30,4 +30,4 @@ ENV PYTHONPATH=/app
 EXPOSE 8000
 
 # Run the application.
-CMD ["uvicorn", "main:app", "--reload", "--port", "8000", "--host", "0.0.0.0", "--log-level", "debug"]
+CMD "streamlit run app_ui.py"

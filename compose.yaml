@@ -1,19 +1,30 @@
+version: '3.8'  # Ensure you specify the version
+
 services:
-  server:
-    # build: .
-    image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
+  # server:
+  #   image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
+  #   ports:
+  #     - 8501:8501
+  #   volumes:
+  #     - ./app:/app
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -f http://localhost:8501 || exit 1"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   restart: always
+
+  ollama:  # New service for running the Dockerfile in /ollama
+    build:
+      context: ./ollama  # Path to the Dockerfile
+      dockerfile: Dockerfile  # Name of the Dockerfile (optional, defaults to Dockerfile)
     ports:
-      - 8000:8000
+      - 11434:11434  # Expose Ollama API port
     volumes:
-      - ./app:/app
-      - ./model_files:/model_files
-    
-    # check if app is running periodically
+      - ./model_files:/model_files  # Mount model files if necessary
+    restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:11434/api/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
-    
-    # restat on failure
-    restart: always
