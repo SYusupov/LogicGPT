@@ -49,22 +49,27 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
       
       - name: Login to Docker Hub
         uses: docker/login-action@v2
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker image for Server
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }}
 
       - name: Build and Push Docker image for Ollama
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
         run: |
           cd ollama  # Navigate to the Ollama directory
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ollama:${{ github.sha }} .
@@ -72,6 +77,7 @@ jobs:
   
       # Clean up Docker system after building and pushing the image
       - name: Clean up Docker
+        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
         run: |
           docker system prune -af --volumes
 
@@ -80,7 +86,6 @@ jobs:
     name: Download Model and Test API
     runs-on: ubuntu-latest
     needs: docker_build # comments this if not running docker_build ($TO_BUILD_DOCKER = false)
-    if: env.TO_BUILD_DOCKER == 'true'  # Apply condition at the job level
 
     steps:
       - name: Checkout Code
