@@ -4,7 +4,7 @@
 ollama serve &
 
 # Wait for the Ollama service to be available
-until curl -s http://localhost:11434/api/health; do
+until curl -s http://localhost:11435/api/health; do
   echo "Waiting for Ollama to start..."
   sleep 2
 done

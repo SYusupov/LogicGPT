@@ -3,6 +3,8 @@ FROM ollama/ollama:latest
 # Copy Modelfile to the container
 COPY Modelfile /Modelfile
 
+RUN apt-get update && apt-get install -y curl
+
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
