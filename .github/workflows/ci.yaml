@@ -68,12 +68,12 @@ jobs:
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/logicgpt:${{ github.sha }}
 
-      - name: Build and Push Docker image for Ollama
-        if: ${{ env.TO_BUILD_DOCKER == 'true' }}
-        run: |
-          cd ollama  # Navigate to the Ollama directory
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ollama:${{ github.sha }} .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ollama:${{ github.sha }}
+      # - name: Build and Push Docker image for Ollama
+      #   if: ${{ env.TO_BUILD_DOCKER == 'true' }}
+      #   run: |
+      #     cd ollama  # Navigate to the Ollama directory
+      #     docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ollama:${{ github.sha }} .
+      #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/ollama:${{ github.sha }}
   
       # Clean up Docker system after building and pushing the image
       - name: Clean up Docker

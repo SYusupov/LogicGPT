@@ -9,8 +9,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
 RUN apt-get update && apt-get install -y g++ curl
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
@@ -24,10 +22,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 RUN rm -rf /root/.cache /var/lib/apt/lists/*
 
-ENV PYTHONPATH=/app
-
 # Expose the port that the application listens on.
-EXPOSE 8000
+EXPOSE 8501
+
+# Ensure Streamlit is available
+RUN python -m streamlit --version
 
 # Run the application.
-CMD "streamlit run app_ui.py"
+CMD streamlit run /app/app_ui.py

@@ -17,8 +17,8 @@ well-reasoned response that demonstrates clear logical thinking.
 ### Reasoned Response:
 """
 
-def generate_response(prompt, model='mistral'):
-    url = 'http://localhost:11434/api/generate'
+def generate_response(prompt, model='finetuned_mistral'):
+    url = 'http://ollama:11434/api/generate'
     headers = {'Content-Type': 'application/json'}
     data = {
         "model": model,

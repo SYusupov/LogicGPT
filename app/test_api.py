@@ -1,7 +1,8 @@
 import requests
 
 # Replace FastAPI's TestClient with actual HTTP calls to the running Ollama server
-ollama_url = "http://localhost:11434/api/generate"
+ollama_url = "http://localhost:11435/api/generate"
+model_name = "finetuned_mistral"
 
 # Long instruction (Babe Ruth example) to be used in testing
 long_instruction = '''Babe was a baseball player known for his prowess at the plate and 
@@ -37,7 +38,7 @@ def test_inference_with_long_instruction_and_input():
     """Test inference with long instruction and additional input."""
     input_text = "Choose A, B, C, or D as your solution."
     payload = {
-        "model": "mistral",  # Assuming your Ollama model name is mistral
+        "model": model_name,  # Assuming your Ollama model name is mistral
         "prompt": f"### Question/Task:\n{long_instruction}\n### Input:\n{input_text}\n### Reasoned Response:"
     }
     response = generate_request(payload)
@@ -50,7 +51,7 @@ def test_inference_with_long_instruction_and_input():
 def test_inference_with_long_instruction_no_input():
     """Test inference with long instruction but no additional input."""
     payload = {
-        "model": "mistral",
+        "model": model_name,
         "prompt": f"### Question/Task:\n{long_instruction}\n### Input:\n\n### Reasoned Response:"
     }
     response = generate_request(payload)
@@ -64,7 +65,7 @@ def test_empty_instruction():
     """Test inference with an empty instruction."""
     input_text = "Choose A, B, C, or D as your solution."
     payload = {
-        "model": "mistral",
+        "model": model_name,
         "prompt": f"### Question/Task:\n\n### Input:\n{input_text}\n### Reasoned Response:"
     }
     response = generate_request(payload)
@@ -86,7 +87,7 @@ def test_invalid_request_structure():
 def test_empty_model_response():
     """Test when the model returns no tokens (edge case)."""
     payload = {
-        "model": "mistral",
+        "model": model_name,
         "prompt": f"### Question/Task:\n\n### Input:\n\n### Reasoned Response:"
     }
     response = generate_request(payload)
@@ -103,7 +104,7 @@ def test_valid_inference():
     How many four-digit numbers greater than 2999 can be formed such that the
     product of the middle two digits exceeds 5?"""
     payload = {
-        "model": "mistral",
+        "model": model_name,
         "prompt": f"### Question/Task:\n{instruction}\n### Input:\n\n### Reasoned Response:"
     }
     response = generate_request(payload)

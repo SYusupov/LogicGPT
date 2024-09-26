@@ -1,16 +1,30 @@
 services:
-  server:
-    image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}
+  ollama:  # New service for running the Dockerfile in /ollama
+    image: ollama/ollama:latest
+    pull_policy: always
+    container_name: ollama
+    ports: ["11435:11434"] # Expose Ollama on port 11435 externally, map it to 11434 inside the container
+    expose:
+      - 11435
+    volumes:
+      - ./model_files:/model_files  # Mount the directory with the trained model
+    tty: true
+    entrypoint: ["/bin/sh", "/model_files/run_ollama_test.sh"] # Loading the finetuned Mistral with the GGUF file
+    # restart: unless-stopped
+  
+  app:
+    # if to build the Dockerfile locally, uncomment lines #17-18, and comment #19
+    build:
+      context: .  # Path to the Dockerfile
+    # image: ${DOCKERHUB_USERNAME}/logicgpt:${DOCKER_IMAGE_TAG}  # Use the image from Docker Hub
+    container_name: logic_app
     ports:
-      - 8000:8000
+      - 8501:8501
+    expose:
+      - 8501
     volumes:
       - ./app:/app
       - ./model_files:/model_files
-    
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    entrypoint: ["/bin/sh", "-c", "pytest /app/test_api.py"]
-    restart: "no"
+    depends_on: # very important! otherwise ollama doesn't run
+      - ollama
+    # restart: unless-stoped
